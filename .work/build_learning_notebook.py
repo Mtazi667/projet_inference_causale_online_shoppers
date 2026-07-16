@@ -49,7 +49,7 @@ def build_notebook() -> nbf.NotebookNode:
 
         </div>
 
-        **Version du carnet :** 0.1  
+        **Édition progressive :** étape 1  
         **Bloc actuellement ouvert :** modules 0 et 1  
         **Prochain bloc prévu :** question contrefactuelle, intervention et estimand
 
@@ -169,14 +169,15 @@ def build_notebook() -> nbf.NotebookNode:
 
         Pour chaque affirmation, écrire **Vrai**, **Faux** ou **Je ne sais pas**, puis une justification d’une phrase. Le but n’est pas d’obtenir une bonne note : il s’agit de conserver une trace de ton intuition de départ.
 
-        1. Une ligne de la base représente nécessairement un client unique.
-        2. `Revenue` mesure le montant d’argent gagné pendant la session.
-        3. Comme le taux de transaction est plus élevé le weekend, le weekend cause davantage d’achats.
-        4. Une hausse de 1,5 point de pourcentage signifie toujours une hausse relative de 1,5 %.
-        5. Si un intervalle de confiance contient zéro, cela prouve que l’effet est exactement nul.
-        6. Pour supprimer les biais, il suffit d’ajuster sur toutes les variables qui prédisent bien `Revenue`.
-        7. L’AIPW élimine aussi la confusion causée par des variables qui ne figurent pas dans les données.
-        8. Si FCI ne place pas d’arête entre `Weekend` et `Revenue`, cela prouve l’absence d’effet causal.
+        1. Le fichier CSV contient un identifiant permettant de vérifier que chaque visiteur n’apparaît qu’une fois.
+        2. Selon la documentation UCI, le jeu a été construit de sorte que chaque session appartienne à un utilisateur différent pendant la période d’un an.
+        3. `Revenue` mesure le montant d’argent gagné pendant la session.
+        4. Comme le taux de transaction est plus élevé le weekend, le weekend cause davantage d’achats.
+        5. Une hausse de 1,5 point de pourcentage signifie toujours une hausse relative de 1,5 %.
+        6. Si un intervalle de confiance contient zéro, cela prouve que l’effet est exactement nul.
+        7. Pour supprimer les biais, il suffit d’ajuster sur toutes les variables qui prédisent bien `Revenue`.
+        8. L’AIPW élimine aussi la confusion causée par des variables qui ne figurent pas dans les données.
+        9. Si FCI ne place pas d’arête entre `Weekend` et `Revenue`, cela prouve l’absence d’effet causal.
         """,
         "diagnostic",
         "exercice",
@@ -198,8 +199,29 @@ def build_notebook() -> nbf.NotebookNode:
         | 6 | _À remplir_ | _À remplir_ | |
         | 7 | _À remplir_ | _À remplir_ | |
         | 8 | _À remplir_ | _À remplir_ | |
+        | 9 | _À remplir_ | _À remplir_ | |
         """,
         "reponse-apprenant",
+    )
+
+    add_markdown(
+        r"""
+        <details>
+        <summary><strong>Corrigé du diagnostic — ouvrir après avoir répondu aux neuf affirmations</strong></summary>
+
+        1. **Faux.** Le CSV ne fournit aucun identifiant de visiteur.
+        2. **Vrai selon la provenance déclarée.** La documentation UCI indique que le jeu a été constitué avec une session par utilisateur distinct pendant l’année. Cette propriété vient de la documentation; elle n’est pas vérifiable directement dans le CSV anonymisé.
+        3. **Faux.** `Revenue` est un indicateur binaire de transaction, pas un montant.
+        4. **Faux.** Un taux plus élevé établit une association descriptive, pas sa cause.
+        5. **Faux.** Un point de pourcentage est une différence absolue; un pourcentage relatif utilise un taux de référence.
+        6. **Faux.** L’intervalle contenant zéro n’établit pas un effet exactement nul; il indique que zéro reste compatible avec les données et la procédure.
+        7. **Faux.** Le rôle temporel et causal d’une variable compte davantage que son pouvoir prédictif.
+        8. **Faux.** L’AIPW ne corrige pas un confondeur non mesuré.
+        9. **Faux.** Un PAG exploratoire sans adjacence ne prouve ni un ATE nul ni l’absence d’effet indirect.
+
+        </details>
+        """,
+        "correction",
     )
 
     add_markdown(
@@ -214,7 +236,7 @@ def build_notebook() -> nbf.NotebookNode:
         **Question causale**  
         « Pour des sessions comparables, que changerait le fait qu’elles aient lieu le weekend plutôt qu’en semaine ? »
 
-        Un excellent prédicteur n’est pas automatiquement une bonne variable d’ajustement causal. Par exemple, `PageValues` peut fortement prédire `Revenue`, mais elle est construite pendant la navigation et son ordre par rapport à la transaction courante est incertain. L’ajuster sans raisonnement temporel peut déformer la question causale.
+        Un excellent prédicteur n’est pas automatiquement une bonne variable d’ajustement causal. Par exemple, `PageValues` peut fortement prédire `Revenue`, mais elle est dérivée des valeurs des pages visitées et son statut temporel par rapport à la transaction courante est incertain. Elle est donc exclue conservativement de l’ajustement.
 
         <div class="attention">
 
@@ -342,14 +364,15 @@ def build_notebook() -> nbf.NotebookNode:
         ### Ce que ces cellules permettent déjà d’affirmer
 
         - Une ligne correspond à une **session observée**.
-        - Rien dans le fichier ne permet d’établir que deux lignes proviennent ou non de la même personne.
+        - Selon la [documentation UCI](https://archive.ics.uci.edu/dataset/468/online+shoppers+purchasing+intention+dataset), le jeu a été construit de sorte que chaque session appartienne à un utilisateur différent pendant l’année.
+        - Le CSV anonymisé ne contient toutefois aucun identifiant permettant de vérifier directement cette propriété.
         - `Weekend` est l’exposition calendaire étudiée.
         - `Revenue` indique si la session se termine par une transaction ; ce n’est pas un montant d’argent.
         - Le titre original du jeu de données parle d’« intention d’achat », mais notre résultat analysé est bien une transaction binaire observée.
 
         <div class="attention">
 
-        **Point à retenir pour la présentation finale :** une diapositive simplifie actuellement la situation en disant « une session = un utilisateur ». Les données ne permettent pas cette équivalence. À l’oral, il faudra préciser : « une ligne représente une session ; plusieurs sessions pourraient appartenir au même visiteur, car aucun identifiant individuel n’est fourni ». Nous reprendrons cette correction lors du module 10.
+        **Point à préciser dans la présentation finale :** la formule « une session = un utilisateur » résume la méthode de construction déclarée par UCI. À l’oral, la formulation rigoureuse sera : « l’unité d’analyse est la session; selon la documentation UCI, chaque session correspond à un utilisateur distinct pendant l’année, mais le CSV ne fournit pas d’identifiant permettant de le contrôler directement ». Nous reprendrons ce point lors du module 10.
 
         </div>
         """,
@@ -397,6 +420,28 @@ def build_notebook() -> nbf.NotebookNode:
 
     add_markdown(
         r"""
+        <details>
+        <summary><strong>Corrigé de l’exercice 0A — ouvrir après la tentative orale</strong></summary>
+
+        Ordre logique : **D → B → E → F → A → C**.
+
+        - On part de l’écart descriptif.
+        - On reconnaît que les groupes n’ont pas été randomisés.
+        - On précise alors la comparaison hypothétique recherchée.
+        - On choisit l’ajustement à partir d’hypothèses causales.
+        - On estime et diagnostique.
+        - On termine par une conclusion proportionnée aux hypothèses et à l’incertitude.
+
+        Une autre narration peut être acceptable si elle conserve ces dépendances logiques et ne transforme pas l’association initiale en preuve causale.
+
+        </details>
+        """,
+        "correction",
+        "oral",
+    )
+
+    add_markdown(
+        r"""
         ## Point de passage du module 0
 
         Avant de considérer ce module comme acquis, je dois pouvoir :
@@ -431,10 +476,10 @@ def build_notebook() -> nbf.NotebookNode:
         r"""
         ## 1.1 Pourquoi la moyenne de `Revenue` est un taux de transaction
 
-        `Revenue` ne peut prendre que deux valeurs :
+        Notons \(Y_i=Revenue_i\) l’indicateur associé à la session \(i\). Il ne peut prendre que deux valeurs :
 
         \[
-        Revenue_i =
+        Y_i =
         \begin{cases}
         1 & \text{si la session } i \text{ se termine par une transaction},\\
         0 & \text{sinon.}
@@ -489,7 +534,7 @@ def build_notebook() -> nbf.NotebookNode:
         \frac{1342}{8371}=16{,}03\% \quad \text{(semaine)}
         \]
 
-        Il s’agit de deux **taux observés** dans deux groupes différents. À ce stade, nous n’avons construit aucun contrefactuel et effectué aucun ajustement causal.
+        Il s’agit de deux **taux observés** dans deux groupes différents. À ce stade, nous n’avons encore défini ni comparaison contrefactuelle, ni estimand, ni stratégie d’identification.
         """,
         "interpretation",
     )
@@ -502,9 +547,9 @@ def build_notebook() -> nbf.NotebookNode:
         |---|---:|---:|---|
         | Échantillon complet | 14,89 % | 17,40 % | Description des 12 330 sessions |
         | Population `SpecialDay=0` | 16,03 % | 18,06 % | Description brute des 11 079 sessions principales |
-        | Moyennes potentielles AIPW | 16,16 % | 17,67 % | Résultats ajustés sous les hypothèses de l’analyse |
+        | Moyennes de résultats potentiels estimées par AIPW | 16,16 % | 17,67 % | Résultats ajustés sous les hypothèses de l’analyse |
 
-        Les deux premières lignes sont des moyennes réellement observées dans des populations différentes. La troisième provient d’un estimateur causal et sera expliquée beaucoup plus tard. Lors d’une question orale, toujours annoncer **de quelle population et de quel type de moyenne il s’agit**.
+        Les deux premières lignes sont des moyennes réellement observées dans des populations différentes. La troisième provient d’un estimateur interprétable causalement si les hypothèses d’identification sont valides; elle sera expliquée beaucoup plus tard. Lors d’une question orale, toujours annoncer **de quelle population et de quel type de moyenne il s’agit**.
         """,
         "interpretation",
         "piege",
@@ -561,11 +606,11 @@ def build_notebook() -> nbf.NotebookNode:
         r"""
         ## 1.3 Une différence observée peut provenir de la composition des groupes
 
-        Imaginons un exemple fictif dans lequel une promotion augmente le taux de transaction, mais le weekend n’a **aucun effet à niveau de promotion identique** :
+        Imaginons un mécanisme fictif précis : une **campagne promotionnelle préexistante** pousse davantage d’utilisateurs à visiter durant le weekend et augmente aussi leur probabilité de transaction, tandis que le weekend lui-même n’a **aucun effet à campagne fixée**.
 
         - sans promotion, le taux est toujours de 10 % ;
         - avec promotion, le taux est toujours de 30 % ;
-        - les promotions sont simplement plus fréquentes le weekend.
+        - la campagne crée davantage de sessions de weekend que de semaine.
 
         La cellule suivante montre que le taux global du weekend peut alors être supérieur même si les taux sont identiques à l’intérieur de chaque niveau de promotion.
         """,
@@ -605,9 +650,9 @@ def build_notebook() -> nbf.NotebookNode:
         r"""
         ### Le raisonnement important
 
-        Dans cet exemple, la promotion est une **cause commune** du moment observé et de la transaction : elle modifie la composition des groupes et le résultat. La différence globale ne représente donc pas un effet du weekend.
+        Dans cette histoire fictive explicitement posée, la campagne est une **cause commune** du moment observé et de la transaction : `Campagne → Weekend` et `Campagne → Revenue`. La différence globale ne représente donc pas un effet du weekend.
 
-        Dans le vrai projet, les prix, promotions, campagnes, produits, heures de visite et intentions préalables ne sont pas mesurés. Nous ne savons pas s’ils expliquent une partie ou la totalité de l’écart observé.
+        Dans le vrai projet, les prix, promotions, campagnes et intentions préalables sont des causes communes non mesurées plausibles. Le produit consulté et l’heure exacte ont un statut temporel plus ambigu : ils pourraient faire partie du contexte pré-session, de la version précise de l’exposition ou de mécanismes postérieurs. Nous ne savons donc pas si ces facteurs expliquent une partie ou la totalité de l’écart observé.
 
         > **Association :** les sessions de weekend ont un taux observé plus élevé.  
         > **Causalité :** le déplacement hypothétique d’une session vers le weekend modifierait son résultat.
@@ -628,7 +673,7 @@ def build_notebook() -> nbf.NotebookNode:
 
         > « L’intervalle regroupe les valeurs raisonnablement compatibles avec les données et la procédure d’estimation. »
 
-        Dans l’interprétation fréquentiste stricte, le niveau de 95 % qualifie la **procédure** : si l’on répétait indéfiniment l’étude et la construction de l’intervalle, environ 95 % des intervalles ainsi obtenus couvriraient la vraie quantité ciblée.
+        Dans l’interprétation fréquentiste stricte, le niveau de 95 % qualifie la **procédure** : si l’on répétait indéfiniment l’étude et la construction de l’intervalle, environ 95 % des intervalles ainsi obtenus couvriraient la vraie quantité ciblée, lorsque la procédure statistique et ses hypothèses sont valides.
 
         **Il ne faut pas dire :** « Il y a 95 % de probabilité que le véritable effet soit dans cet intervalle. » Une fois l’intervalle calculé, ses bornes sont fixes.
 
@@ -638,6 +683,8 @@ def build_notebook() -> nbf.NotebookNode:
         - Estimation **AIPW principale** : `+1,506 [−0,176 ; 3,188]` points.
 
         L’intervalle brut exclut zéro, mais cela ne transforme pas l’association brute en effet causal : un biais de confusion n’est pas une incertitude d’échantillonnage. L’intervalle AIPW contient zéro ; il ne prouve pas que l’effet est nul, mais il ne permet pas d’écarter l’absence d’effet moyen.
+
+        L’intervalle AIPW quantifie l’incertitude d’échantillonnage autour de l’estimand identifié sous les hypothèses. Il ne couvre pas l’incertitude sur le DAG, la confusion non mesurée, la définition de l’exposition ou la sélection des sessions; il ne transforme donc pas une identification incertaine en conclusion causale.
         """,
         "concept",
         "incertitude",
@@ -708,11 +755,11 @@ def build_notebook() -> nbf.NotebookNode:
         Répondre sans copier les formulations du cours.
 
         1. Refaire manuellement les calculs `489 / 2 708` et `1 342 / 8 371`.
-        2. Expliquer la différence entre **+1,506 point** et **+1,506 % relatif**.
-        3. Traduire `+1,506 point` en nombre de transactions pour 1 000 sessions comparables.
-        4. Traduire l’intervalle `[−0,176 ; 3,188]` en nombre approximatif de transactions pour 1 000 sessions.
+        2. Comparer **+1,506 point** à **+1,506 % relativement au risque de semaine AIPW de 16,16 %**.
+        3. Si les hypothèses causales sont valides, traduire l’estimation AIPW de `+1,506 point` pour 1 000 sessions de la population cible.
+        4. Sous les mêmes hypothèses, traduire l’intervalle `[−0,176 ; 3,188]` en nombre approximatif de transactions pour 1 000 sessions de la population cible.
         5. Pourquoi l’intervalle brut excluant zéro ne suffit-il pas à prouver un effet causal ?
-        6. Dans l’exemple fictif des promotions, comment obtient-on un écart global de 8 points alors que le weekend n’a aucun effet à promotion identique ?
+        6. Dans l’exemple fictif, comment une campagne qui provoque davantage de visites le weekend et augmente aussi la transaction produit-elle un écart global de 8 points alors que le weekend n’a aucun effet à campagne fixée ?
 
         </div>
         """,
@@ -742,6 +789,23 @@ def build_notebook() -> nbf.NotebookNode:
         _À remplir_
         """,
         "reponse-apprenant",
+    )
+
+    add_markdown(
+        r"""
+        <details>
+        <summary><strong>Corrigé de l’exercice 1A — ouvrir après avoir tout calculé</strong></summary>
+
+        1. \(489/2708=18{,}058\%\) et \(1342/8371=16{,}032\%\), donc l’écart brut vaut \(2{,}026\) points.
+        2. `+1,506 point` est une différence absolue. Relativement au risque de semaine AIPW de 16,16 %, cela représente environ \(1{,}506/16{,}16=9{,}32\%\). Une hausse relative de 1,506 % depuis 16,16 % ne vaudrait qu’environ 0,243 point.
+        3. Sous les hypothèses causales : environ **+15 transactions pour 1 000 sessions** de la population cible.
+        4. L’intervalle correspond approximativement à **−2 à +32 transactions pour 1 000**. Ce n’est pas une prévision du trafic total.
+        5. L’IC brut ne traite que l’incertitude d’échantillonnage de l’association brute; il ne supprime pas la confusion ni les autres biais d’identification.
+        6. La campagne est plus fréquente parmi les sessions de weekend et augmente la transaction. Elle modifie donc la composition des groupes. Les taux conditionnels restent 10 % sans campagne et 30 % avec campagne dans les deux moments, mais le mélange global donne 14 % contre 22 %.
+
+        </details>
+        """,
+        "correction",
     )
 
     add_markdown(
@@ -776,6 +840,26 @@ def build_notebook() -> nbf.NotebookNode:
         _À remplir_
         """,
         "reponse-apprenant",
+    )
+
+    add_markdown(
+        r"""
+        <details>
+        <summary><strong>Corrigé de l’exercice 1B — ouvrir après avoir réécrit les quatre phrases</strong></summary>
+
+        1. **Problèmes :** causalité affirmée, mauvaise unité, population absente.  
+           **Correction :** « Dans la population `SpecialDay=0`, le taux observé est supérieur de 2,03 points de pourcentage le weekend; cet écart brut ne prouve pas un effet causal. »
+        2. **Problème :** absence de preuve confondue avec preuve d’absence.  
+           **Correction :** « L’intervalle principal contient zéro; les données ne permettent pas d’écarter l’absence d’effet moyen, sans prouver que l’effet vaut exactement zéro. »
+        3. **Problème :** la significativité ne règle pas l’identification.  
+           **Correction :** « L’écart brut est statistiquement différent de zéro selon son IC, mais peut encore refléter la confusion et d’autres biais. »
+        4. **Problèmes :** `Revenue` n’est ni un montant ni une mesure par client.  
+           **Correction :** « `Revenue` indique si une session s’est terminée par une transaction. »
+
+        </details>
+        """,
+        "correction",
+        "oral",
     )
 
     add_markdown(

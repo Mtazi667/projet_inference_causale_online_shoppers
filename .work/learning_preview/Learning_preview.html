@@ -7814,7 +7814,7 @@ a.anchor-link {
 <h1 id="Carnet-d%E2%80%99apprentissage-%E2%80%94-Inf%C3%A9rence-causale">Carnet d’apprentissage — Inférence causale<a class="anchor-link" href="#Carnet-d%E2%80%99apprentissage-%E2%80%94-Inf%C3%A9rence-causale">¶</a></h1><p><strong>Projet étudié :</strong> effet d’une session durant le weekend, plutôt qu’en semaine, sur la probabilité de transaction<br/>
 <strong>Finalité :</strong> comprendre le projet en profondeur, l’expliquer clairement et le défendre lorsque les questions sortent du script</p>
 </div>
-<p><strong>Version du carnet :</strong> 0.1<br/>
+<p><strong>Édition progressive :</strong> étape 1<br/>
 <strong>Bloc actuellement ouvert :</strong> modules 0 et 1<br/>
 <strong>Prochain bloc prévu :</strong> question contrefactuelle, intervention et estimand</p>
 <blockquote>
@@ -8019,7 +8019,8 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput celltag_diagnostic celltag_exercice" data-mime-type="text/markdown">
 <h2 id="Diagnostic-initial-%E2%80%94-r%C3%A9pondre-avant-le-cours">Diagnostic initial — répondre avant le cours<a class="anchor-link" href="#Diagnostic-initial-%E2%80%94-r%C3%A9pondre-avant-le-cours">¶</a></h2><p>Pour chaque affirmation, écrire <strong>Vrai</strong>, <strong>Faux</strong> ou <strong>Je ne sais pas</strong>, puis une justification d’une phrase. Le but n’est pas d’obtenir une bonne note : il s’agit de conserver une trace de ton intuition de départ.</p>
 <ol>
-<li>Une ligne de la base représente nécessairement un client unique.</li>
+<li>Le fichier CSV contient un identifiant permettant de vérifier que chaque visiteur n’apparaît qu’une fois.</li>
+<li>Selon la documentation UCI, le jeu a été construit de sorte que chaque session appartienne à un utilisateur différent pendant la période d’un an.</li>
 <li><code>Revenue</code> mesure le montant d’argent gagné pendant la session.</li>
 <li>Comme le taux de transaction est plus élevé le weekend, le weekend cause davantage d’achats.</li>
 <li>Une hausse de 1,5 point de pourcentage signifie toujours une hausse relative de 1,5 %.</li>
@@ -8099,6 +8100,12 @@ a.anchor-link {
 <td><em>À remplir</em></td>
 <td></td>
 </tr>
+<tr>
+<td style="text-align:right">9</td>
+<td><em>À remplir</em></td>
+<td><em>À remplir</em></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -8110,13 +8117,37 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput celltag_correction" data-mime-type="text/markdown">
+<details>
+<summary><strong>Corrigé du diagnostic — ouvrir après avoir répondu aux neuf affirmations</strong></summary>
+<ol>
+<li><strong>Faux.</strong> Le CSV ne fournit aucun identifiant de visiteur.</li>
+<li><strong>Vrai selon la provenance déclarée.</strong> La documentation UCI indique que le jeu a été constitué avec une session par utilisateur distinct pendant l’année. Cette propriété vient de la documentation; elle n’est pas vérifiable directement dans le CSV anonymisé.</li>
+<li><strong>Faux.</strong> <code>Revenue</code> est un indicateur binaire de transaction, pas un montant.</li>
+<li><strong>Faux.</strong> Un taux plus élevé établit une association descriptive, pas sa cause.</li>
+<li><strong>Faux.</strong> Un point de pourcentage est une différence absolue; un pourcentage relatif utilise un taux de référence.</li>
+<li><strong>Faux.</strong> L’intervalle contenant zéro n’établit pas un effet exactement nul; il indique que zéro reste compatible avec les données et la procédure.</li>
+<li><strong>Faux.</strong> Le rôle temporel et causal d’une variable compte davantage que son pouvoir prédictif.</li>
+<li><strong>Faux.</strong> L’AIPW ne corrige pas un confondeur non mesuré.</li>
+<li><strong>Faux.</strong> Un PAG exploratoire sans adjacence ne prouve ni un ATE nul ni l’absence d’effet indirect.</li>
+</ol>
+</details>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-008">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput celltag_concept" data-mime-type="text/markdown">
 <h2 id="0.1-Pr%C3%A9dire-n%E2%80%99est-pas-expliquer-causalement">0.1 Prédire n’est pas expliquer causalement<a class="anchor-link" href="#0.1-Pr%C3%A9dire-n%E2%80%99est-pas-expliquer-causalement">¶</a></h2><p>Deux questions peuvent utiliser les mêmes données tout en étant profondément différentes.</p>
 <p><strong>Question prédictive</strong><br/>
 « À partir de ce que l’on observe pendant la navigation, quelles sessions termineront par une transaction ? »</p>
 <p><strong>Question causale</strong><br/>
 « Pour des sessions comparables, que changerait le fait qu’elles aient lieu le weekend plutôt qu’en semaine ? »</p>
-<p>Un excellent prédicteur n’est pas automatiquement une bonne variable d’ajustement causal. Par exemple, <code>PageValues</code> peut fortement prédire <code>Revenue</code>, mais elle est construite pendant la navigation et son ordre par rapport à la transaction courante est incertain. L’ajuster sans raisonnement temporel peut déformer la question causale.</p>
+<p>Un excellent prédicteur n’est pas automatiquement une bonne variable d’ajustement causal. Par exemple, <code>PageValues</code> peut fortement prédire <code>Revenue</code>, mais elle est dérivée des valeurs des pages visitées et son statut temporel par rapport à la transaction courante est incertain. Elle est donc exclue conservativement de l’ajustement.</p>
 <div class="attention">
 <p><strong>Phrase à éviter :</strong> « Le projet cherche à prédire si un client va acheter. »<br/>
 <strong>Formulation correcte :</strong> « Le projet cherche à estimer un contraste moyen de probabilité de transaction entre weekend et semaine, sous des hypothèses causales. »</p>
@@ -8125,7 +8156,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-008">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-009">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8144,7 +8175,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-009">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-010">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8161,7 +8192,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_code-cours" id="cell-id=cours-010">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_code-cours" id="cell-id=cours-011">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8220,7 +8251,7 @@ Données utilisées : C:\Users\Tazi\Desktop\School\Projet\projet_ml_causalite_ag
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_code-cours celltag_verification" id="cell-id=cours-011">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_code-cours celltag_verification" id="cell-id=cours-012">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8258,7 +8289,7 @@ Colonnes : Administrative, Administrative_Duration, Informational, Informational
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_code-cours" id="cell-id=cours-012">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_code-cours" id="cell-id=cours-013">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8353,7 +8384,7 @@ Colonnes : Administrative, Administrative_Duration, Informational, Informational
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-013">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-014">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8361,19 +8392,20 @@ Colonnes : Administrative, Administrative_Duration, Informational, Informational
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput celltag_interpretation" data-mime-type="text/markdown">
 <h3 id="Ce-que-ces-cellules-permettent-d%C3%A9j%C3%A0-d%E2%80%99affirmer">Ce que ces cellules permettent déjà d’affirmer<a class="anchor-link" href="#Ce-que-ces-cellules-permettent-d%C3%A9j%C3%A0-d%E2%80%99affirmer">¶</a></h3><ul>
 <li>Une ligne correspond à une <strong>session observée</strong>.</li>
-<li>Rien dans le fichier ne permet d’établir que deux lignes proviennent ou non de la même personne.</li>
+<li>Selon la <a href="https://archive.ics.uci.edu/dataset/468/online+shoppers+purchasing+intention+dataset">documentation UCI</a>, le jeu a été construit de sorte que chaque session appartienne à un utilisateur différent pendant l’année.</li>
+<li>Le CSV anonymisé ne contient toutefois aucun identifiant permettant de vérifier directement cette propriété.</li>
 <li><code>Weekend</code> est l’exposition calendaire étudiée.</li>
 <li><code>Revenue</code> indique si la session se termine par une transaction ; ce n’est pas un montant d’argent.</li>
 <li>Le titre original du jeu de données parle d’« intention d’achat », mais notre résultat analysé est bien une transaction binaire observée.</li>
 </ul>
 <div class="attention">
-<p><strong>Point à retenir pour la présentation finale :</strong> une diapositive simplifie actuellement la situation en disant « une session = un utilisateur ». Les données ne permettent pas cette équivalence. À l’oral, il faudra préciser : « une ligne représente une session ; plusieurs sessions pourraient appartenir au même visiteur, car aucun identifiant individuel n’est fourni ». Nous reprendrons cette correction lors du module 10.</p>
+<p><strong>Point à préciser dans la présentation finale :</strong> la formule « une session = un utilisateur » résume la méthode de construction déclarée par UCI. À l’oral, la formulation rigoureuse sera : « l’unité d’analyse est la session; selon la documentation UCI, chaque session correspond à un utilisateur distinct pendant l’année, mais le CSV ne fournit pas d’identifiant permettant de le contrôler directement ». Nous reprendrons ce point lors du module 10.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-014">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-015">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8395,7 +8427,7 @@ Colonnes : Administrative, Administrative_Duration, Informational, Informational
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-015">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-016">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8410,7 +8442,30 @@ Colonnes : Administrative, Administrative_Duration, Informational, Informational
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-016">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-017">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput celltag_correction celltag_oral" data-mime-type="text/markdown">
+<details>
+<summary><strong>Corrigé de l’exercice 0A — ouvrir après la tentative orale</strong></summary>
+<p>Ordre logique : <strong>D → B → E → F → A → C</strong>.</p>
+<ul>
+<li>On part de l’écart descriptif.</li>
+<li>On reconnaît que les groupes n’ont pas été randomisés.</li>
+<li>On précise alors la comparaison hypothétique recherchée.</li>
+<li>On choisit l’ajustement à partir d’hypothèses causales.</li>
+<li>On estime et diagnostique.</li>
+<li>On termine par une conclusion proportionnée aux hypothèses et à l’incertitude.</li>
+</ul>
+<p>Une autre narration peut être acceptable si elle conserve ces dépendances logiques et ne transforme pas l’association initiale en preuve causale.</p>
+</details>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-018">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8429,7 +8484,7 @@ Colonnes : Administrative, Administrative_Duration, Informational, Informational
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-017">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-019">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8443,15 +8498,15 @@ Colonnes : Administrative, Administrative_Duration, Informational, Informational
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-018">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-020">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput celltag_concept celltag_mathematiques" data-mime-type="text/markdown">
-<h2 id="1.1-Pourquoi-la-moyenne-de-Revenue-est-un-taux-de-transaction">1.1 Pourquoi la moyenne de <code>Revenue</code> est un taux de transaction<a class="anchor-link" href="#1.1-Pourquoi-la-moyenne-de-Revenue-est-un-taux-de-transaction">¶</a></h2><p><code>Revenue</code> ne peut prendre que deux valeurs :</p>
+<h2 id="1.1-Pourquoi-la-moyenne-de-Revenue-est-un-taux-de-transaction">1.1 Pourquoi la moyenne de <code>Revenue</code> est un taux de transaction<a class="anchor-link" href="#1.1-Pourquoi-la-moyenne-de-Revenue-est-un-taux-de-transaction">¶</a></h2><p>Notons (Y_i=Revenue_i) l’indicateur associé à la session (i). Il ne peut prendre que deux valeurs :</p>
 <p>[
-Revenue_i =
+Y_i =
 \begin{cases}
 1 &amp; \text{si la session } i \text{ se termine par une transaction},\\
 0 &amp; \text{sinon.}
@@ -8465,7 +8520,7 @@ Revenue_i =
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_code-cours celltag_resultats" id="cell-id=cours-019">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_code-cours celltag_resultats" id="cell-id=cours-021">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8504,13 +8559,13 @@ Revenue_i =
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style type="text/css">
 </style>
-<table id="T_70cf4">
+<table id="T_b9422">
 <thead>
 <tr>
 <th class="blank level0"> </th>
-<th class="col_heading level0 col0" id="T_70cf4_level0_col0">Sessions</th>
-<th class="col_heading level0 col1" id="T_70cf4_level0_col1">Transactions</th>
-<th class="col_heading level0 col2" id="T_70cf4_level0_col2">Taux (%)</th>
+<th class="col_heading level0 col0" id="T_b9422_level0_col0">Sessions</th>
+<th class="col_heading level0 col1" id="T_b9422_level0_col1">Transactions</th>
+<th class="col_heading level0 col2" id="T_b9422_level0_col2">Taux (%)</th>
 </tr>
 <tr>
 <th class="index_name level0">Weekend</th>
@@ -8521,16 +8576,16 @@ Revenue_i =
 </thead>
 <tbody>
 <tr>
-<th class="row_heading level0 row0" id="T_70cf4_level0_row0">Semaine</th>
-<td class="data row0 col0" id="T_70cf4_row0_col0">8,371</td>
-<td class="data row0 col1" id="T_70cf4_row0_col1">1,342</td>
-<td class="data row0 col2" id="T_70cf4_row0_col2">16.03 %</td>
+<th class="row_heading level0 row0" id="T_b9422_level0_row0">Semaine</th>
+<td class="data row0 col0" id="T_b9422_row0_col0">8,371</td>
+<td class="data row0 col1" id="T_b9422_row0_col1">1,342</td>
+<td class="data row0 col2" id="T_b9422_row0_col2">16.03 %</td>
 </tr>
 <tr>
-<th class="row_heading level0 row1" id="T_70cf4_level0_row1">Weekend</th>
-<td class="data row1 col0" id="T_70cf4_row1_col0">2,708</td>
-<td class="data row1 col1" id="T_70cf4_row1_col1">489</td>
-<td class="data row1 col2" id="T_70cf4_row1_col2">18.06 %</td>
+<th class="row_heading level0 row1" id="T_b9422_level0_row1">Weekend</th>
+<td class="data row1 col0" id="T_b9422_row1_col0">2,708</td>
+<td class="data row1 col1" id="T_b9422_row1_col1">489</td>
+<td class="data row1 col2" id="T_b9422_row1_col2">18.06 %</td>
 </tr>
 </tbody>
 </table>
@@ -8546,7 +8601,7 @@ Revenue_i =
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-020">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-022">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8559,12 +8614,12 @@ Revenue_i =
 <p>[
 \frac{1342}{8371}=16{,}03% \quad \text{(semaine)}
 ]</p>
-<p>Il s’agit de deux <strong>taux observés</strong> dans deux groupes différents. À ce stade, nous n’avons construit aucun contrefactuel et effectué aucun ajustement causal.</p>
+<p>Il s’agit de deux <strong>taux observés</strong> dans deux groupes différents. À ce stade, nous n’avons encore défini ni comparaison contrefactuelle, ni estimand, ni stratégie d’identification.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-021">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-023">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8593,19 +8648,19 @@ Revenue_i =
 <td>Description brute des 11 079 sessions principales</td>
 </tr>
 <tr>
-<td>Moyennes potentielles AIPW</td>
+<td>Moyennes de résultats potentiels estimées par AIPW</td>
 <td style="text-align:right">16,16 %</td>
 <td style="text-align:right">17,67 %</td>
 <td>Résultats ajustés sous les hypothèses de l’analyse</td>
 </tr>
 </tbody>
 </table>
-<p>Les deux premières lignes sont des moyennes réellement observées dans des populations différentes. La troisième provient d’un estimateur causal et sera expliquée beaucoup plus tard. Lors d’une question orale, toujours annoncer <strong>de quelle population et de quel type de moyenne il s’agit</strong>.</p>
+<p>Les deux premières lignes sont des moyennes réellement observées dans des populations différentes. La troisième provient d’un estimateur interprétable causalement si les hypothèses d’identification sont valides; elle sera expliquée beaucoup plus tard. Lors d’une question orale, toujours annoncer <strong>de quelle population et de quel type de moyenne il s’agit</strong>.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-022">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-024">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8628,7 +8683,7 @@ Cette phrase mélange l’échelle, suppose déjà la causalité et ne précise 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_code-cours celltag_calcul" id="cell-id=cours-023">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_code-cours celltag_calcul" id="cell-id=cours-025">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8671,23 +8726,23 @@ Variation relative brute : 12.64 %
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-024">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-026">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput celltag_concept celltag_confusion" data-mime-type="text/markdown">
-<h2 id="1.3-Une-diff%C3%A9rence-observ%C3%A9e-peut-provenir-de-la-composition-des-groupes">1.3 Une différence observée peut provenir de la composition des groupes<a class="anchor-link" href="#1.3-Une-diff%C3%A9rence-observ%C3%A9e-peut-provenir-de-la-composition-des-groupes">¶</a></h2><p>Imaginons un exemple fictif dans lequel une promotion augmente le taux de transaction, mais le weekend n’a <strong>aucun effet à niveau de promotion identique</strong> :</p>
+<h2 id="1.3-Une-diff%C3%A9rence-observ%C3%A9e-peut-provenir-de-la-composition-des-groupes">1.3 Une différence observée peut provenir de la composition des groupes<a class="anchor-link" href="#1.3-Une-diff%C3%A9rence-observ%C3%A9e-peut-provenir-de-la-composition-des-groupes">¶</a></h2><p>Imaginons un mécanisme fictif précis : une <strong>campagne promotionnelle préexistante</strong> pousse davantage d’utilisateurs à visiter durant le weekend et augmente aussi leur probabilité de transaction, tandis que le weekend lui-même n’a <strong>aucun effet à campagne fixée</strong>.</p>
 <ul>
 <li>sans promotion, le taux est toujours de 10 % ;</li>
 <li>avec promotion, le taux est toujours de 30 % ;</li>
-<li>les promotions sont simplement plus fréquentes le weekend.</li>
+<li>la campagne crée davantage de sessions de weekend que de semaine.</li>
 </ul>
 <p>La cellule suivante montre que le taux global du weekend peut alors être supérieur même si les taux sont identiques à l’intérieur de chaque niveau de promotion.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_code-cours celltag_exemple" id="cell-id=cours-025">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_code-cours celltag_exemple" id="cell-id=cours-027">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8852,14 +8907,14 @@ Au total : 14 % en semaine contre 22 % le weekend, soit +8 points.
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-026">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-028">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput celltag_interpretation celltag_causalite" data-mime-type="text/markdown">
-<h3 id="Le-raisonnement-important">Le raisonnement important<a class="anchor-link" href="#Le-raisonnement-important">¶</a></h3><p>Dans cet exemple, la promotion est une <strong>cause commune</strong> du moment observé et de la transaction : elle modifie la composition des groupes et le résultat. La différence globale ne représente donc pas un effet du weekend.</p>
-<p>Dans le vrai projet, les prix, promotions, campagnes, produits, heures de visite et intentions préalables ne sont pas mesurés. Nous ne savons pas s’ils expliquent une partie ou la totalité de l’écart observé.</p>
+<h3 id="Le-raisonnement-important">Le raisonnement important<a class="anchor-link" href="#Le-raisonnement-important">¶</a></h3><p>Dans cette histoire fictive explicitement posée, la campagne est une <strong>cause commune</strong> du moment observé et de la transaction : <code>Campagne → Weekend</code> et <code>Campagne → Revenue</code>. La différence globale ne représente donc pas un effet du weekend.</p>
+<p>Dans le vrai projet, les prix, promotions, campagnes et intentions préalables sont des causes communes non mesurées plausibles. Le produit consulté et l’heure exacte ont un statut temporel plus ambigu : ils pourraient faire partie du contexte pré-session, de la version précise de l’exposition ou de mécanismes postérieurs. Nous ne savons donc pas si ces facteurs expliquent une partie ou la totalité de l’écart observé.</p>
 <blockquote>
 <p><strong>Association :</strong> les sessions de weekend ont un taux observé plus élevé.<br/>
 <strong>Causalité :</strong> le déplacement hypothétique d’une session vers le weekend modifierait son résultat.</p>
@@ -8869,7 +8924,7 @@ Au total : 14 % en semaine contre 22 % le weekend, soit +8 points.
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-027">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-029">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8880,17 +8935,18 @@ Au total : 14 % en semaine contre 22 % le weekend, soit +8 points.
 <blockquote>
 <p>« L’intervalle regroupe les valeurs raisonnablement compatibles avec les données et la procédure d’estimation. »</p>
 </blockquote>
-<p>Dans l’interprétation fréquentiste stricte, le niveau de 95 % qualifie la <strong>procédure</strong> : si l’on répétait indéfiniment l’étude et la construction de l’intervalle, environ 95 % des intervalles ainsi obtenus couvriraient la vraie quantité ciblée.</p>
+<p>Dans l’interprétation fréquentiste stricte, le niveau de 95 % qualifie la <strong>procédure</strong> : si l’on répétait indéfiniment l’étude et la construction de l’intervalle, environ 95 % des intervalles ainsi obtenus couvriraient la vraie quantité ciblée, lorsque la procédure statistique et ses hypothèses sont valides.</p>
 <p><strong>Il ne faut pas dire :</strong> « Il y a 95 % de probabilité que le véritable effet soit dans cet intervalle. » Une fois l’intervalle calculé, ses bornes sont fixes.</p>
 <h3 id="Deux-r%C3%A9sultats-%C3%A0-ne-pas-confondre">Deux résultats à ne pas confondre<a class="anchor-link" href="#Deux-r%C3%A9sultats-%C3%A0-ne-pas-confondre">¶</a></h3><ul>
 <li>Différence <strong>brute</strong> : <code>+2,026 [0,378 ; 3,674]</code> points.</li>
 <li>Estimation <strong>AIPW principale</strong> : <code>+1,506 [−0,176 ; 3,188]</code> points.</li>
 </ul>
 <p>L’intervalle brut exclut zéro, mais cela ne transforme pas l’association brute en effet causal : un biais de confusion n’est pas une incertitude d’échantillonnage. L’intervalle AIPW contient zéro ; il ne prouve pas que l’effet est nul, mais il ne permet pas d’écarter l’absence d’effet moyen.</p>
+<p>L’intervalle AIPW quantifie l’incertitude d’échantillonnage autour de l’estimand identifié sous les hypothèses. Il ne couvre pas l’incertitude sur le DAG, la confusion non mesurée, la définition de l’exposition ou la sélection des sessions; il ne transforme donc pas une identification incertaine en conclusion causale.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_code-cours celltag_visualisation" id="cell-id=cours-028">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_code-cours celltag_visualisation" id="cell-id=cours-030">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9015,7 +9071,7 @@ Au total : 14 % en semaine contre 22 % le weekend, soit +8 points.
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-029">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-031">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9028,7 +9084,7 @@ Au total : 14 % en semaine contre 22 % le weekend, soit +8 points.
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-030">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-032">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9038,18 +9094,18 @@ Au total : 14 % en semaine contre 22 % le weekend, soit +8 points.
 <p>Répondre sans copier les formulations du cours.</p>
 <ol>
 <li>Refaire manuellement les calculs <code>489 / 2 708</code> et <code>1 342 / 8 371</code>.</li>
-<li>Expliquer la différence entre <strong>+1,506 point</strong> et <strong>+1,506 % relatif</strong>.</li>
-<li>Traduire <code>+1,506 point</code> en nombre de transactions pour 1 000 sessions comparables.</li>
-<li>Traduire l’intervalle <code>[−0,176 ; 3,188]</code> en nombre approximatif de transactions pour 1 000 sessions.</li>
+<li>Comparer <strong>+1,506 point</strong> à <strong>+1,506 % relativement au risque de semaine AIPW de 16,16 %</strong>.</li>
+<li>Si les hypothèses causales sont valides, traduire l’estimation AIPW de <code>+1,506 point</code> pour 1 000 sessions de la population cible.</li>
+<li>Sous les mêmes hypothèses, traduire l’intervalle <code>[−0,176 ; 3,188]</code> en nombre approximatif de transactions pour 1 000 sessions de la population cible.</li>
 <li>Pourquoi l’intervalle brut excluant zéro ne suffit-il pas à prouver un effet causal ?</li>
-<li>Dans l’exemple fictif des promotions, comment obtient-on un écart global de 8 points alors que le weekend n’a aucun effet à promotion identique ?</li>
+<li>Dans l’exemple fictif, comment une campagne qui provoque davantage de visites le weekend et augmente aussi la transaction produit-elle un écart global de 8 points alors que le weekend n’a aucun effet à campagne fixée ?</li>
 </ol>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-031">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-033">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9071,7 +9127,28 @@ Au total : 14 % en semaine contre 22 % le weekend, soit +8 points.
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-032">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-034">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput celltag_correction" data-mime-type="text/markdown">
+<details>
+<summary><strong>Corrigé de l’exercice 1A — ouvrir après avoir tout calculé</strong></summary>
+<ol>
+<li>(489/2708=18{,}058%) et (1342/8371=16{,}032%), donc l’écart brut vaut (2{,}026) points.</li>
+<li><code>+1,506 point</code> est une différence absolue. Relativement au risque de semaine AIPW de 16,16 %, cela représente environ (1{,}506/16{,}16=9{,}32%). Une hausse relative de 1,506 % depuis 16,16 % ne vaudrait qu’environ 0,243 point.</li>
+<li>Sous les hypothèses causales : environ <strong>+15 transactions pour 1 000 sessions</strong> de la population cible.</li>
+<li>L’intervalle correspond approximativement à <strong>−2 à +32 transactions pour 1 000</strong>. Ce n’est pas une prévision du trafic total.</li>
+<li>L’IC brut ne traite que l’incertitude d’échantillonnage de l’association brute; il ne supprime pas la confusion ni les autres biais d’identification.</li>
+<li>La campagne est plus fréquente parmi les sessions de weekend et augmente la transaction. Elle modifie donc la composition des groupes. Les taux conditionnels restent 10 % sans campagne et 30 % avec campagne dans les deux moments, mais le mélange global donne 14 % contre 22 %.</li>
+</ol>
+</details>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-035">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9088,7 +9165,7 @@ Au total : 14 % en semaine contre 22 % le weekend, soit +8 points.
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-033">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-036">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9106,7 +9183,30 @@ Au total : 14 % en semaine contre 22 % le weekend, soit +8 points.
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-034">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-037">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput celltag_correction celltag_oral" data-mime-type="text/markdown">
+<details>
+<summary><strong>Corrigé de l’exercice 1B — ouvrir après avoir réécrit les quatre phrases</strong></summary>
+<ol>
+<li><strong>Problèmes :</strong> causalité affirmée, mauvaise unité, population absente.<br/>
+<strong>Correction :</strong> « Dans la population <code>SpecialDay=0</code>, le taux observé est supérieur de 2,03 points de pourcentage le weekend; cet écart brut ne prouve pas un effet causal. »</li>
+<li><strong>Problème :</strong> absence de preuve confondue avec preuve d’absence.<br/>
+<strong>Correction :</strong> « L’intervalle principal contient zéro; les données ne permettent pas d’écarter l’absence d’effet moyen, sans prouver que l’effet vaut exactement zéro. »</li>
+<li><strong>Problème :</strong> la significativité ne règle pas l’identification.<br/>
+<strong>Correction :</strong> « L’écart brut est statistiquement différent de zéro selon son IC, mais peut encore refléter la confusion et d’autres biais. »</li>
+<li><strong>Problèmes :</strong> <code>Revenue</code> n’est ni un montant ni une mesure par client.<br/>
+<strong>Correction :</strong> « <code>Revenue</code> indique si une session s’est terminée par une transaction. »</li>
+</ol>
+</details>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-038">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9133,7 +9233,7 @@ Au total : 14 % en semaine contre 22 % le weekend, soit +8 points.
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-035">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-039">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9151,7 +9251,7 @@ Au total : 14 % en semaine contre 22 % le weekend, soit +8 points.
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-036">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-040">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9176,7 +9276,7 @@ Au total : 14 % en semaine contre 22 % le weekend, soit +8 points.
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-037">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-041">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9237,7 +9337,7 @@ Au total : 14 % en semaine contre 22 % le weekend, soit +8 points.
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-038">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-042">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9266,7 +9366,7 @@ Au total : 14 % en semaine contre 22 % le weekend, soit +8 points.
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-039">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cours-043">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
