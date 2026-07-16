@@ -1,0 +1,14 @@
+Arête du PAG
+Periode o-o JourSpecial
+Periode o-o NouveauVisiteur
+Periode --> SourceTrafic
+Periode --> Revenue
+JourSpecial o-o NouveauVisiteur
+JourSpecial --> SourceTrafic
+JourSpecial --> Weekend
+JourSpecial --> Revenue
+NouveauVisiteur --> SourceTrafic
+NouveauVisiteur --> Weekend
+NouveauVisiteur --> Revenue
+Weekend o-> SourceTrafic
+SourceTrafic --> Revenue
