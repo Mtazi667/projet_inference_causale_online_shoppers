@@ -1,19 +1,14 @@
-SCRIPT DE SOUTENANCE — VERSION DE PRÉPARATION
+SCRIPT DE SOUTENANCE — TEXTES DE PRÉPARATION
 Projet d’inférence causale sur les sessions d’achat en ligne
 Durée totale disponible : 15 minutes
 
-Pour chaque partie, ce fichier contiendra :
-1. un texte complet pour comprendre et préparer le discours ;
-2. un fil conducteur en points pour parler plus librement.
-
-Les durées indiquées correspondent au fil conducteur prononcé à l’oral.
-Le texte complet est volontairement plus développé et ne doit pas être lu intégralement pendant la présentation.
+Ce fichier contient uniquement les textes complets servant à comprendre et à préparer le discours.
+Il ne doit pas être lu mot pour mot pendant la présentation.
+Les repères à utiliser pendant l’oral se trouvent dans le fichier téléphone séparé.
 
 ============================================================
-INTRODUCTION — DURÉE VISÉE : ENVIRON 50 SECONDES À 1 MINUTE
+INTRODUCTION — ENVIRON 50 SECONDES À 1 MINUTE
 ============================================================
-
-VERSION 1 — TEXTE COMPLET POUR PRÉPARER L’INTRODUCTION
 
 Bonjour, je vais vous présenter mon projet final d’inférence causale appliqué aux intentions d’achat en ligne.
 
@@ -26,45 +21,10 @@ La difficulté centrale est que les données sont observationnelles : le weekend
 Je présenterai d’abord la question et les données, puis la méthode causale, les résultats obtenus et enfin leurs limites.
 
 
-VERSION 2 — FIL CONDUCTEUR EN POINTS
-Ces points sont des repères à développer librement, pas des phrases à réciter.
-
-1. Saluer le professeur.
-
-2. Projet final : inférence causale appliquée aux intentions d’achat en ligne.
-
-3. Point de départ : sessions du weekend comparées aux sessions de semaine.
-
-4. Résultat étudié : probabilité que la session se termine par une transaction.
-
-5. Revenue : achat oui/non — pas un montant d’argent.
-
-6. Question causale : effet moyen du weekend sur cette probabilité.
-
-7. Ne pas prédire les achats session par session.
-
-8. Données observationnelles — Weekend non attribué au hasard.
-
-9. Conséquence : différence observée ≠ preuve automatique d’un effet causal.
-
-10. Annonce du parcours :
-    - question et données ;
-    - méthode causale ;
-    - résultats ;
-    - limites.
-
-REPÈRE AVEC L’ÉCRAN
-- La diapositive de titre reste affichée.
-- S’appuyer sur les mots « inférence causale » et « intentions d’achat en ligne ».
-- Ne pas annoncer les méthodes ou les chiffres : ils seront expliqués sur leurs diapositives.
-
-
 ------------------------------------------------------------
 DIAPOSITIVE 2 — QUESTION CAUSALE ET POPULATION CIBLE
 Durée visée : environ 1 minute 25 à 1 minute 40
 ------------------------------------------------------------
-
-VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
 
 Cette diapositive précise l’effet recherché. L’unité est une session de navigation : `Weekend`, noté T, est l’exposition, et `Revenue`, noté Y, indique si elle se termine par une transaction.
 
@@ -79,266 +39,56 @@ L’analyse principale cible donc les 11 079 sessions où `SpecialDay=0`, hors p
 Au centre, les taux bruts sont de 16,03 % en semaine et de 18,06 % le weekend, soit un écart de 2,026 points. Ces chiffres sont descriptifs : ce ne sont ni l’AIPW ajustée ni une preuve causale. Le DAG suivant déterminera les différences préexistantes à ajuster.
 
 
-VERSION 2 — FIL CONDUCTEUR EN POINTS
-
-1. Repartir de la question affichée à gauche : effet moyen du weekend sur la conversion d’une session.
-
-2. Unité étudiée : une session de navigation.
-
-3. Montrer les deux variables en bas à gauche :
-   - T = `Weekend` — exposition ;
-   - Y = `Revenue` — transaction oui/non.
-
-4. Effet recherché : différence moyenne de probabilité d’achat, pas montant dépensé.
-
-5. Intervention hypothétique : sessions comparables placées le weekend plutôt qu’en semaine.
-
-6. Pas une expérience randomisée réelle.
-
-7. Encadré gris : 12 330 sessions dans la base complète.
-
-8. Nuance sur « une session = un utilisateur » :
-   - utilisateurs distincts selon la documentation UCI ;
-   - aucun identifiant dans le CSV pour le vérifier directement.
-
-9. Passer au graphique de droite : `SpecialDay` = proximité d’un jour commercial spécial.
-
-10. Valeurs non nulles : très mauvais recouvrement entre semaine et weekend.
-
-11. Problème concret : comparer ces zones obligerait le modèle à extrapoler presque sans observations comparables.
-
-12. Revenir à la ligne « Cible » : restriction à `SpecialDay=0`.
-
-13. Population principale : 11 079 sessions hors proximité mesurée d’un jour commercial spécial.
-
-14. Avantage : comparaison plus crédible.
-
-15. Prix à payer : conclusion limitée à cette population, pas à toutes les sessions.
-
-16. Graphique central — taux bruts dans cette cible :
-    - semaine : 16,03 % ;
-    - weekend : 18,06 %.
-
-17. Différence brute : +2,026 points de pourcentage.
-
-18. Prudence indispensable : chiffres descriptifs — ni AIPW ajustée, ni preuve causale.
-
-19. Transition : déterminer les différences préexistantes à ajuster sans contrôler les conséquences du weekend → DAG suivant.
-
-REPÈRE AVEC L’ÉCRAN
-- Commencer par le texte de gauche, puis descendre vers T, Y et les effectifs.
-- Aller ensuite au graphique `SpecialDay` à droite pour justifier la restriction.
-- Revenir à « Cible : SpecialDay = 0 • N = 11 079 ».
-- Terminer par les deux barres centrales et leur interprétation descriptive.
-- Ne pas confondre ces taux avec les moyennes potentielles AIPW présentées plus tard.
-
-
 ------------------------------------------------------------
-DIAPOSITIVE 3 — DAG ET CHOIX DES VARIABLES D’AJUSTEMENT
+DIAPOSITIVE 3 — DAG ET CHOIX DES VARIABLES
 Durée visée : environ 1 minute 30 à 1 minute 45
 ------------------------------------------------------------
 
-VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+Ce dessin m’a surtout servi à organiser les variables et à réfléchir à l’ordre dans lequel elles apparaissent. Je ne vais pas détailler chaque flèche. L’idée générale est de séparer ce qui existe avant la session de ce qui peut se produire pendant ou après celle-ci.
 
-Après avoir défini la population cible, il faut décider quelles variables ajuster. Le DAG est une carte de mes hypothèses causales et de l’ordre temporel des variables. Ce n’est pas un graphique de corrélations et ses flèches ne sont pas des effets estimés par les données.
+Au centre, le cercle orange représente `Weekend` et le cercle rouge représente `Revenue`. À gauche, les cercles verts regroupent le calendrier, le profil du visiteur et le canal de trafic. Ce sont les informations que j’ai considérées comme déjà présentes avant la comparaison. Je les utilise donc pour rendre les sessions de semaine et de weekend aussi comparables que possible.
 
-Au centre, le nœud orange représente `Weekend`, l’exposition, et le nœud rouge représente `Revenue`, le résultat. Les nœuds verts à gauche regroupent les informations supposées antérieures à la session : le calendrier correspond principalement au mois; le profil comprend le type de visiteur, la région, le système d’exploitation et le navigateur; le canal correspond à `TrafficType`.
+À droite, la navigation et `PageValues` sont en gris. Ces informations sont produites pendant la visite ou sont très proches du résultat final. Les ajouter pourrait mélanger les causes possibles avec les conséquences de la session. J’ai donc préféré ne pas les utiliser dans l’ajustement principal.
 
-Ces caractéristiques peuvent influencer à la fois le fait d’observer une session le weekend et sa probabilité de transaction. Elles peuvent donc créer des chemins de confusion, appelés chemins de porte arrière. L’analyse les ajuste pour essayer de bloquer ces chemins.
+Les deux cercles gris du haut représentent des informations que la base ne fournit pas, comme les promotions, les prix ou l’intention d’achat du visiteur. C’est une limite importante : si elles influencent à la fois le moment de la visite et l’achat, mon analyse ne peut pas les corriger directement.
 
-À l’inverse, les variables de navigation et `PageValues`, en gris à droite, sont exclues parce qu’elles sont mesurées pendant ou après la session. Ajuster un médiateur pourrait supprimer une partie de l’effet recherché; ajuster un collider pourrait créer une association artificielle; `PageValues` présente aussi un risque de fuite d’information liée au résultat.
+Le cas de `TrafficType` est moins clair. Je l’ai gardé dans l’analyse principale, puis j’ai aussi refait le calcul sans cette variable pour vérifier si elle changeait beaucoup le résultat.
 
-Les nœuds gris du haut rappellent enfin les promotions, les prix et l’intention d’achat, qui ne sont pas observés. Ils représentent une limite importante, car aucune méthode ne peut directement ajuster une variable absente du fichier.
-
-Le statut temporel de `TrafficType` reste ambigu. L’analyse principale l’utilise comme variable pré-exposition, puis une analyse de sensibilité vérifie ce qui change lorsqu’on la retire. Ce DAG reste donc un modèle raisonné, pas une vérité démontrée; FCI apporte ensuite un regard exploratoire fondé sur les données.
-
-
-VERSION 2 — FIL CONDUCTEUR EN POINTS
-
-1. Transition depuis la cible : décider maintenant quelles variables ajuster.
-
-2. DAG = carte des hypothèses causales et de l’ordre temporel.
-
-3. Ne pas le présenter comme une preuve issue des données ni comme un simple graphique de corrélations.
-
-4. Commencer au centre :
-   - orange = `Weekend`, exposition ;
-   - rouge = `Revenue`, résultat.
-
-5. Passer aux nœuds verts à gauche : caractéristiques supposées antérieures à l’exposition.
-
-6. Calendrier → principalement `Month`.
-
-7. Profil visiteur → `VisitorType`, `Region`, `OperatingSystems`, `Browser`.
-
-8. Canal trafic → `TrafficType`.
-
-9. Intuition de la porte arrière : ces variables peuvent influencer à la fois Weekend et Revenue.
-
-10. Décision affichée en bas : ajuster calendrier, profil et trafic pour bloquer ces chemins de confusion.
-
-11. Nœuds gris à droite : navigation et `PageValues`, mesurées pendant ou après la session.
-
-12. Pourquoi les exclure :
-    - médiateur → risque de bloquer une partie de l’effet total ;
-    - collider → risque de créer un biais ;
-    - `PageValues` → possible fuite d’information liée au résultat.
-
-13. Nœuds gris du haut : promotions, prix et intention d’achat non observés.
-
-14. Limite : aucune méthode ne peut ajuster directement ce qui manque dans le fichier.
-
-15. Point ambigu : ordre temporel de `TrafficType` pas totalement certain.
-
-16. Choix du projet : inclus dans l’analyse principale, puis retiré dans une sensibilité.
-
-17. Transition : DAG raisonné, donc ajout d’un second regard exploratoire avec FCI.
-
-REPÈRE AVEC L’ÉCRAN
-- Partir de `Weekend` en orange et de `Revenue` en rouge.
-- Aller vers les trois nœuds verts, puis lire « Ajuster » dans le bandeau inférieur.
-- Passer aux nœuds gris de droite, puis lire « Exclure ».
-- Terminer par les deux nœuds gris du haut et la colonne « Non observé ».
-- Ne pas essayer de suivre chaque flèche une par une : expliquer les familles de variables.
+Ce DAG représente donc ma façon de raisonner sur le problème; il ne prouve pas que toutes les flèches sont vraies. La diapositive suivante présente une deuxième façon, plus automatique, d’examiner les liens possibles dans les données.
 
 
 ------------------------------------------------------------
-DIAPOSITIVE 4 — FCI ET PAG EXPLORATOIRE
-Durée visée : environ 1 minute 20 à 1 minute 35
+DIAPOSITIVE 4 — FCI COMME ANALYSE EXPLORATOIRE
+Durée visée : environ 1 minute 15 à 1 minute 30
 ------------------------------------------------------------
 
-VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+Pour compléter le schéma construit à partir de mon raisonnement, j’ai utilisé FCI. D’une manière simple, cette méthode regarde les liens présents dans les données et essaie de produire un graphe compatible avec ce qu’elle observe. Elle accepte aussi que certaines causes importantes puissent manquer dans le fichier. Le graphe obtenu est appelé un PAG.
 
-Le DAG précédent partait de connaissances et d’hypothèses formulées avant l’analyse. FCI, pour Fast Causal Inference, prend le problème dans l’autre sens : il examine les indépendances conditionnelles observées et cherche quelles relations restent compatibles avec les données, tout en autorisant l’existence de causes cachées.
+Pour rendre le calcul possible, les variables ont été regroupées en six grandes catégories. Les principaux réglages sont résumés dans l’encadré bleu à droite. Le résultat n’est pas un graphe certain : certaines directions restent volontairement incomplètes parce que les données ne permettent pas toujours de savoir dans quel sens va une relation.
 
-Ici, l’analyse exploratoire regroupe six grandes variables dans les 12 330 sessions complètes. Elle utilise un test G² d’indépendance conditionnelle, un seuil principal de 1 % et des contraintes temporelles. FCI produit un PAG, c’est-à-dire une carte où certaines orientations restent volontairement partielles parce que les données ne permettent pas toujours de choisir un sens causal unique. La légende du bas distingue ainsi les directions imposées, partielles ou indéterminées.
+Le point que je retiens est indiqué dans le titre. FCI ne place pas de lien direct entre `Weekend` et `Revenue`, et le même résultat apparaît avec les trois réglages testés.
 
-Le message principal du graphe est dans le titre : FCI ne conserve pas d’arête directe entre `Weekend` et `Revenue`, et cette absence persiste aux trois seuils testés.
+Il ne faut cependant pas conclure que le weekend n’a aucun effet. Un lien peut passer par d’autres variables, et le résultat dépend aussi de la manière dont les variables ont été regroupées et des choix faits pour lancer la méthode.
 
-Il faut cependant lire ce résultat avec prudence. L’absence d’arête directe ne prouve pas que l’effet total est nul : un chemin indirect peut exister. Le résultat dépend aussi du regroupement et de la discrétisation des variables, de la puissance des tests, des contraintes imposées et des hypothèses de FCI. De plus, le PAG utilise la base complète, tandis que l’analyse principale cible `SpecialDay=0`.
-
-FCI constitue donc une exploration complémentaire, pas un arbitre capable de réfuter ou de confirmer l’AIPW. Le DAG raisonné reste la base de l’identification. La prochaine diapositive formalise alors le contraste, ses hypothèses et les méthodes utilisées pour l’estimer.
-
-
-VERSION 2 — FIL CONDUCTEUR EN POINTS
-
-1. Lien avec la diapositive précédente : DAG construit à partir du raisonnement de domaine.
-
-2. FCI = Fast Causal Inference.
-
-3. Intuition : partir des indépendances observées pour explorer les relations encore compatibles avec les données.
-
-4. Particularité : FCI autorise l’existence de causes cachées ou variables latentes.
-
-5. Encadré bleu à droite — configuration :
-   - six variables regroupées ;
-   - 12 330 sessions complètes ;
-   - test G² d’indépendance conditionnelle ;
-   - seuil principal de 1 % ;
-   - contraintes temporelles.
-
-6. Résultat = PAG, une carte de relations parfois seulement partiellement orientées.
-
-7. Légende du bas : directions imposées, partielles ou indéterminées.
-
-8. Ne pas expliquer chaque arête; se concentrer sur `Weekend` orange et `Revenue` rouge.
-
-9. Observation principale : aucune arête directe entre Weekend et Revenue.
-
-10. Robustesse interne : même absence aux trois seuils testés.
-
-11. Attention : absence d’arête directe ≠ effet total nul.
-
-12. Un effet pourrait passer par un chemin indirect.
-
-13. Autres limites : regroupement, discrétisation, puissance des tests, contraintes et hypothèses de FCI.
-
-14. Population différente : PAG sur les 12 330 sessions; AIPW principale dans `SpecialDay=0`.
-
-15. Conclusion : FCI complète le DAG, mais ne le remplace pas et ne réfute pas l’AIPW.
-
-16. Transition : revenir au DAG pour définir formellement l’effet et les méthodes d’estimation.
-
-REPÈRE AVEC L’ÉCRAN
-- Commencer par l’encadré « Analyse exploratoire » à droite.
-- Montrer ensuite le PAG et identifier seulement Weekend et Revenue.
-- Faire constater visuellement l’absence de ligne directe entre eux.
-- Utiliser l’encadré orange « Lecture prudente » pour donner immédiatement la limite.
-- Finir par la transition vers le cadre Pearl/Rubin.
+J’utilise donc FCI comme une vérification exploratoire supplémentaire, et non comme une preuve. Pour l’analyse principale, je garde le DAG construit à partir de la logique du projet. La prochaine diapositive traduit cette logique en une quantité précise à estimer.
 
 
 ------------------------------------------------------------
-DIAPOSITIVE 5 — CADRE PEARL/RUBIN ET ESTIMATION
-Durée visée : environ 1 minute 50 à 2 minutes 05
+DIAPOSITIVE 5 — CE QUE NOUS CHERCHONS ET COMMENT NOUS LE CALCULONS
+Durée visée : environ 1 minute 45 à 2 minutes
 ------------------------------------------------------------
 
-VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+Cette diapositive peut sembler très technique, mais elle rassemble simplement la question, les conditions nécessaires et les méthodes utilisées.
 
-Cette diapositive relie deux cadres complémentaires. Le cadre de Pearl, avec le DAG et la porte arrière, indique quelles variables ajuster. Le cadre de Rubin, avec les résultats potentiels, définit précisément l’effet que nous voulons connaître.
+À gauche, la formule reprend la même idée que depuis le début. `Y(1)` représente ce qui arriverait à une session dans la situation weekend et `Y(0)` dans la situation semaine. On cherche la différence moyenne entre ces deux situations uniquement pour les sessions où `SpecialDay=0`. La ligne Z indique les informations utilisées pour rendre la comparaison plus juste.
 
-Dans le bloc bleu, la formule représente l’estimand. `Y(1)` est le résultat potentiel d’une session sous weekend et `Y(0)` son résultat potentiel sous semaine. Leur différence est moyennée parmi les sessions où `SpecialDay=0`. Autrement dit, nous cherchons l’effet moyen du weekend sur la probabilité de transaction dans cette population cible. L’ensemble Z contient les six covariables d’ajustement retenues par le DAG.
+Le titre mentionne Pearl et Rubin. Dans ce projet, Pearl correspond surtout au schéma causal utilisé pour choisir les variables. Rubin correspond à l’idée de comparer deux situations possibles pour une même session. Les deux approches m’aident donc à répondre à deux questions différentes mais complémentaires.
 
-Le bloc gris rappelle les quatre hypothèses nécessaires. La consistance relie le résultat observé au scénario réellement reçu et suppose que l’intervention « weekend » est suffisamment bien définie. L’échangeabilité conditionnelle suppose qu’après ajustement sur Z, aucun confondeur important ne reste non mesuré. La positivité exige que chaque profil analysé puisse être observé dans les deux groupes. Enfin, l’absence d’interférence suppose que le jour d’une session ne modifie pas le résultat d’une autre.
+À droite, quatre conditions sont indiquées. En termes simples, il faut que la définition du weekend soit assez cohérente, que les groupes soient comparables après avoir tenu compte des variables choisies, que les deux types de sessions existent pour les profils étudiés et qu’une session ne change pas directement le résultat d’une autre. La condition la plus difficile est celle qui suppose qu’aucune information importante ne manque dans la comparaison. Elle ne peut pas être garantie avec cette base.
 
-La partie inférieure montre quatre regards sur le même contraste. La différence brute ne fait aucun ajustement. La standardisation modélise le résultat. L’IPW de Hájek modélise l’exposition avec le score de propension et normalise les poids. L’AIPW combine les modèles du résultat et de l’exposition, puis utilise un cross-fitting en cinq plis pour limiter le surajustement. C’est l’estimateur principal.
+En bas, j’ai utilisé plusieurs méthodes pour ne pas dépendre d’un seul calcul. La différence brute compare directement les taux. La standardisation corrige la comparaison à partir du résultat. L’IPW donne plus ou moins d’importance aux sessions selon leur profil. Enfin, l’AIPW combine ces deux idées. Le cross-fitting sépare les données en plusieurs parties afin d’éviter que les modèles soient évalués exactement sur les mêmes observations qui ont servi à les ajuster.
 
-L’AIPW possède une double robustesse vis-à-vis de ces deux modèles statistiques, mais elle ne protège ni contre un confondeur absent ni contre une mauvaise question causale. C’est pourquoi la phrase rouge insiste sur les hypothèses non testables, surtout l’échangeabilité. Avant d’interpréter l’estimation, la diapositive suivante vérifie concrètement le recouvrement et donc la positivité pratique.
-
-
-VERSION 2 — FIL CONDUCTEUR EN POINTS
-
-1. Deux cadres complémentaires :
-   - Pearl → DAG, porte arrière, choix des variables ;
-   - Rubin → résultats potentiels, définition du contraste.
-
-2. Bloc bleu à gauche : formule de l’estimand, c’est-à-dire la quantité que l’on cherche.
-
-3. `Y(1)` = résultat potentiel si la session a lieu le weekend.
-
-4. `Y(0)` = résultat potentiel si elle a lieu en semaine.
-
-5. `Y(1) − Y(0)` = différence conceptuelle pour une même session.
-
-6. Espérance E = moyenne de ces différences.
-
-7. Condition `SpecialDay=0` = population cible de 11 079 sessions.
-
-8. Traduction simple : effet moyen du weekend sur la probabilité de transaction dans cette cible.
-
-9. Ensemble Z affiché : `Month`, `VisitorType`, `Region`, `OperatingSystems`, `Browser`, `TrafficType`.
-
-10. Bloc gris — consistance : résultat observé cohérent avec le scénario réellement reçu; Weekend suffisamment bien défini.
-
-11. Échangeabilité conditionnelle : après Z, aucun confondeur important non mesuré.
-
-12. Insister : hypothèse la plus forte et non directement testable.
-
-13. Positivité : pour chaque profil, possibilité d’observer semaine et weekend.
-
-14. Absence d’interférence : une session ne modifie pas le résultat d’une autre.
-
-15. Ligne du bas — quatre regards sur le même contraste :
-    - brute → aucune correction ;
-    - standardisation → modèle du résultat ;
-    - IPW de Hájek → modèle de l’exposition et poids normalisés ;
-    - AIPW → combinaison des deux modèles.
-
-16. AIPW principale : deux modèles + cross-fitting en cinq plis pour limiter le surajustement.
-
-17. Double robustesse : protection contre la mauvaise spécification d’un des deux modèles de nuisance, sous les autres hypothèses.
-
-18. Limite obligatoire : aucune protection contre un confondeur non mesuré ou un DAG erroné.
-
-19. Relier à la phrase rouge : interprétation causale dépendante d’hypothèses non testables.
-
-20. Transition : vérifier maintenant que des profils comparables existent dans les deux groupes → scores de propension.
-
-REPÈRE AVEC L’ÉCRAN
-- Commencer par le bloc bleu : formule, traduction, puis ensemble Z.
-- Passer au bloc gris et expliquer les quatre hypothèses dans l’ordre affiché.
-- Descendre sur la ligne des quatre méthodes, de gauche à droite.
-- S’arrêter un peu plus sur l’AIPW orange, puisque c’est la méthode principale.
-- Terminer en montrant la phrase rouge, puis annoncer le contrôle du recouvrement.
+L’AIPW est ma méthode principale parce qu’elle combine deux approches, mais elle ne peut toujours pas corriger une variable absente. Avant de regarder son résultat, je vérifie donc si les sessions de semaine et de weekend sont suffisamment comparables dans les données.
 
 
 ------------------------------------------------------------
@@ -346,319 +96,79 @@ DIAPOSITIVE 6 — SCORE DE PROPENSION ET RECOUVREMENT
 Durée visée : environ 1 minute à 1 minute 10
 ------------------------------------------------------------
 
-VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+Le score de propension correspond ici à la probabilité estimée qu’une session se déroule le weekend en fonction de son profil. Ce n’est pas la probabilité que la session se termine par un achat.
 
-Après avoir posé l’hypothèse de positivité, il faut vérifier si elle est crédible dans les données. Le score de propension est la probabilité estimée qu’une session ait lieu le weekend compte tenu des covariables Z. Il ne représente surtout pas la probabilité que la session aboutisse à un achat.
+Sur le graphique, le bleu représente la semaine et l’orange le weekend. Les deux distributions se superposent largement. Cela signifie que, pour beaucoup de profils, nous avons des exemples dans les deux groupes. La comparaison repose donc davantage sur des sessions réellement observées que sur des situations inventées par le modèle.
 
-L’histogramme superpose les scores des sessions de semaine, en bleu, et de weekend, en orange. Leur large recouvrement signifie que, pour de nombreux profils comparables, nous observons réellement les deux situations. Si les distributions étaient séparées, l’analyse devrait inventer la comparaison par extrapolation et certains poids deviendraient très grands.
+Les scores vont approximativement de 0,05 à 0,92. Seulement neuf observations se trouvent sous 0,05 et aucune ne dépasse 0,95. Il y a donc très peu de cas presque toujours classés dans un seul groupe.
 
-À droite, l’étendue estimée va approximativement de 0,05 à 0,92. Seulement neuf observations sont légèrement sous 0,05 et aucune n’est au-dessus de 0,95. Les situations presque certaines d’être en semaine ou presque certaines d’être en weekend sont donc rares dans la population restreinte.
-
-Ce diagnostic soutient la positivité pratique pour les sessions `SpecialDay=0`. Il ne prouve toutefois ni l’échangeabilité ni l’absence de confusion cachée, car il repose uniquement sur les covariables observées et sur un score estimé. Le recouvrement rend la pondération possible; il reste maintenant à vérifier si cette pondération équilibre réellement les groupes.
-
-
-VERSION 2 — FIL CONDUCTEUR EN POINTS
-
-1. Reprendre l’hypothèse précédente : positivité à vérifier dans les données.
-
-2. Score de propension = probabilité estimée qu’une session ait lieu le weekend, compte tenu de Z.
-
-3. Attention : ce n’est pas la probabilité d’achat.
-
-4. Axe horizontal du graphique = probabilité estimée de Weekend.
-
-5. Histogrammes :
-   - bleu = sessions de semaine ;
-   - orange = sessions de weekend.
-
-6. Large zone commune = profils comparables réellement présents dans les deux groupes.
-
-7. Sans recouvrement : extrapolation du modèle et poids potentiellement extrêmes.
-
-8. Encadré gris : scores approximativement de 0,05 à 0,92.
-
-9. Encadré orange :
-   - neuf observations sous 0,05 ;
-   - aucune au-dessus de 0,95.
-
-10. Interprétation : très peu de sessions presque certaines d’appartenir à un seul groupe.
-
-11. Conclusion limitée : positivité pratique crédible dans la population `SpecialDay=0`.
-
-12. Ne pas conclure à l’échangeabilité ou à l’absence de confondeurs cachés.
-
-13. Transition : le recouvrement permet les poids; vérifier maintenant s’ils équilibrent les covariables.
-
-REPÈRE AVEC L’ÉCRAN
-- Commencer par définir le score en utilisant l’axe horizontal.
-- Montrer la superposition bleue et orange au centre du graphique.
-- Passer aux deux encadrés chiffrés à droite.
-- Terminer par la phrase noire : le diagnostic ne renseigne pas sur la confusion cachée.
+Ce graphique soutient l’idée que la comparaison est possible dans la population `SpecialDay=0`. Il ne montre pas que toutes les différences entre les groupes ont disparu, surtout pour les informations absentes de la base. L’étape suivante est donc de vérifier si la pondération rapproche réellement les groupes sur les variables que nous possédons.
 
 
 ------------------------------------------------------------
-DIAPOSITIVE 7 — ÉQUILIBRE DES COVARIABLES APRÈS IPW
+DIAPOSITIVE 7 — ÉQUILIBRE APRÈS PONDÉRATION
 Durée visée : environ 55 secondes à 1 minute 05
 ------------------------------------------------------------
 
-VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+Après avoir calculé les scores, l’IPW donne un poids différent aux sessions afin de rendre les groupes plus semblables.
 
-Le recouvrement permet de calculer les poids IPW. Leur objectif est de créer une pseudo-population dans laquelle les groupes semaine et weekend se ressemblent davantage sur les covariables observées.
+Le SMD est simplement une mesure de la distance entre la composition des groupes semaine et weekend. Plus un point est proche de zéro, plus les groupes se ressemblent pour la variable concernée. Les lignes pointillées marquent la limite habituelle de 0,10.
 
-Le graphique utilise la différence moyenne standardisée, ou SMD, pour mesurer le déséquilibre. Une valeur proche de zéro signifie que la modalité est répartie de façon similaire entre les groupes. Les lignes pointillées à moins 0,10 et plus 0,10 représentent le seuil usuel au-delà duquel un déséquilibre devient préoccupant.
+Les points rouges montrent les différences avant la pondération. Le plus grand écart vaut alors 0,268. Les points verts montrent la situation après la pondération : ils sont tous beaucoup plus proches de zéro, le plus grand écart tombe à 0,040 et aucun ne dépasse 0,10.
 
-Les points rouges décrivent la situation avant pondération. Le SMD absolu maximal atteint alors 0,268, ce qui montre des écarts de composition. Les points verts décrivent la situation après IPW : ils se rapprochent tous de zéro, le maximum tombe à 0,040 et aucune modalité ne dépasse 0,10.
-
-La pondération a donc bien équilibré les covariables incluses dans le modèle. Cette vérification est utile, mais elle ne concerne que ce qui a été mesuré; elle ne crée pas l’équilibre sur les promotions, les prix ou l’intention d’achat absents. Une fois le support et l’équilibre vérifiés, nous pouvons interpréter l’estimation principale et son incertitude.
-
-
-VERSION 2 — FIL CONDUCTEUR EN POINTS
-
-1. Recouvrement suffisant → calcul des poids IPW possible.
-
-2. Objectif de l’IPW : rendre les groupes plus comparables sur les covariables observées.
-
-3. SMD = différence moyenne standardisée entre semaine et weekend.
-
-4. Zéro sur l’axe = équilibre parfait pour la modalité concernée.
-
-5. Lignes pointillées à ±0,10 = seuil usuel de déséquilibre préoccupant.
-
-6. Points rouges = avant pondération.
-
-7. Avant IPW : SMD absolu maximal de 0,268.
-
-8. Points verts = après pondération, tous rapprochés de zéro.
-
-9. Après IPW : SMD absolu maximal de 0,040.
-
-10. Aucune modalité au-dessus de |SMD| = 0,10 après pondération.
-
-11. Conclusion : bon équilibre des covariables incluses dans le modèle.
-
-12. Limite : aucun équilibre garanti pour les variables non observées.
-
-13. Transition : support et équilibre vérifiés → lire l’estimation principale et son incertitude.
-
-REPÈRE AVEC L’ÉCRAN
-- Définir le SMD en montrant l’axe horizontal et le zéro central.
-- Montrer les lignes pointillées à ±0,10.
-- Comparer visuellement les points rouges aux points verts.
-- Lire ensuite l’encadré « 0,268 → 0,040 ».
-- Finir par l’encadré bleu qui limite la conclusion aux covariables observées.
+Je peux donc dire que la pondération a bien rapproché les groupes sur les variables observées. Je ne peux pas dire qu’elle a également équilibré les prix, les promotions ou les intentions d’achat, puisque ces informations ne sont pas dans le fichier. Une fois cette vérification faite, je peux présenter le résultat principal.
 
 
 ------------------------------------------------------------
-DIAPOSITIVE 8 — RÉSULTAT PRINCIPAL AIPW
+DIAPOSITIVE 8 — RÉSULTAT PRINCIPAL
 Durée visée : environ 1 minute 25 à 1 minute 40
 ------------------------------------------------------------
 
-VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+Sur ce graphique, les points représentent les différences estimées et les lignes horizontales représentent leur incertitude. La ligne verticale en zéro est importante : lorsqu’un intervalle la traverse, les données restent compatibles avec l’absence de différence moyenne.
 
-Cette diapositive présente le résultat principal. Dans le graphique, chaque point est une estimation centrale et chaque ligne horizontale son intervalle de confiance à 95 %. La ligne verticale en zéro permet de voir si les données restent compatibles avec l’absence d’effet moyen.
+La première ligne montre la différence brute de +2,026 points. Les trois méthodes ajustées donnent des résultats un peu plus faibles mais assez proches, entre +1,384 et +1,506 point. Cela est rassurant, car le résultat central ne vient pas d’une seule méthode, mais cela ne suffit pas à rendre l’analyse certaine.
 
-La première ligne est la différence brute observée : +2,026 points de pourcentage, avec un intervalle de 0,378 à 3,674. Elle décrit une association, sans ajustement. Les trois estimateurs ajustés donnent ensuite des centres proches : +1,384 point pour la standardisation, +1,444 pour l’IPW et +1,506 pour l’AIPW. Leur accord montre que le centre n’est pas propre à une seule méthode, mais il ne valide pas les hypothèses qu’elles partagent.
+Le résultat principal est celui de l’AIPW : +1,506 point de probabilité d’achat. Son intervalle exact va de −0,176 à 3,188 points. Sur la diapositive, ces valeurs sont arrondies à +1,51 et [−0,18; 3,19].
 
-L’AIPW est l’analyse principale. Elle estime une hausse moyenne de 1,506 point, avec un intervalle exact de −0,176 à 3,188 points; la diapositive les arrondit à +1,51 et [−0,18; 3,19]. Les moyennes de résultats potentiels estimées sont de 17,67 % sous weekend et de 16,16 % sous semaine.
+L’encadré gris donne deux taux estimés après ajustement : 17,67 % dans la situation weekend et 16,16 % dans la situation semaine. Ce ne sont pas les taux bruts observés de la deuxième diapositive, qui étaient de 18,06 % et 16,03 %.
 
-Ces deux moyennes sont ajustées et estimées. Elles ne doivent pas être confondues avec les taux bruts observés précédemment, 18,06 % et 16,03 %. Comme l’intervalle AIPW contient zéro, l’analyse ne permet pas d’établir un effet moyen différent de zéro. Elle ne prouve pas non plus que l’effet est exactement nul : les données sont compatibles avec une petite baisse comme avec une hausse allant jusqu’à environ 3,19 points, sous les hypothèses de l’analyse.
-
-Le message correct est donc un centre positif et modeste, accompagné d’une incertitude importante. La prochaine étape consiste à modifier plusieurs choix raisonnables pour voir si ce message résiste.
-
-
-VERSION 2 — FIL CONDUCTEUR EN POINTS
-
-1. Graphique principal :
-   - point = estimation centrale ;
-   - ligne horizontale = intervalle de confiance à 95 % ;
-   - ligne verticale à zéro = absence d’effet moyen.
-
-2. Première ligne — différence brute observée : +2,026 points.
-
-3. IC brut : [0,378; 3,674] — association descriptive, sans ajustement.
-
-4. Trois centres ajustés proches :
-   - standardisation : +1,384 ;
-   - IPW : +1,444 ;
-   - AIPW : +1,506 point.
-
-5. Accord utile entre méthodes, mais pas validation automatique de leurs hypothèses communes.
-
-6. Encadré orange — résultat principal AIPW : +1,506 point.
-
-7. IC exact à 95 % : [−0,176; 3,188].
-
-8. Valeurs arrondies visibles : +1,51 et [−0,18; 3,19].
-
-9. Encadré gris — moyennes potentielles estimées :
-   - weekend : 17,67 % ;
-   - semaine : 16,16 %.
-
-10. Ne pas les confondre avec les taux bruts observés : 18,06 % et 16,03 %.
-
-11. Différence entre moyennes potentielles = estimation AIPW de 1,506 point.
-
-12. L’IC AIPW traverse zéro.
-
-13. Conclusion permise : impossible d’établir un effet moyen différent de zéro.
-
-14. Conclusion interdite : « le weekend n’a aucun effet ».
-
-15. Valeurs compatibles : petite baisse jusqu’à hausse d’environ 3,19 points, sous hypothèses.
-
-16. Message central : signal positif modeste, mais incertitude importante.
-
-17. Transition : tester maintenant la dépendance du résultat aux choix raisonnables d’analyse.
-
-REPÈRE AVEC L’ÉCRAN
-- Commencer par la ligne verticale zéro, puis expliquer les points et intervalles.
-- Lire le graphique du haut vers le bas : brute, standardisation, IPW, AIPW.
-- Passer à l’encadré orange pour annoncer le résultat principal exact puis arrondi.
-- Descendre vers les deux moyennes potentielles dans l’encadré gris.
-- Revenir au fait que l’intervalle principal traverse zéro.
+Comme l’intervalle principal contient zéro, je ne peux pas affirmer que le weekend augmente réellement la probabilité d’achat. Je ne peux pas non plus affirmer que son effet est exactement nul. Je retiens donc un petit signal positif, mais encore trop incertain pour parler de preuve.
 
 
 ------------------------------------------------------------
-DIAPOSITIVE 9 — ROBUSTESSE, E-VALUE ET LIMITES
-Durée visée : environ 1 minute 35 à 1 minute 50
+DIAPOSITIVE 9 — VÉRIFICATIONS, E-VALUE ET LIMITES
+Durée visée : environ 1 minute 30 à 1 minute 45
 ------------------------------------------------------------
 
-VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+Cette diapositive montre ce qui se passe lorsque je change plusieurs choix raisonnables de l’analyse. Chaque ligne correspond à une autre façon de refaire le calcul.
 
-Comme l’estimation dépend de choix de population, de variables et de modèles, cette diapositive compare six analyses de sensibilité. Dans le graphique, chaque point orange est une estimation AIPW et chaque barre représente son intervalle; la ligne verticale correspond à zéro.
+Les résultats centraux restent tous positifs, entre environ +1,20 et +2,23 points. Par exemple, retirer `TrafficType` donne +2,23 points, tandis qu’utiliser une forêt aléatoire donne environ +1,74 point. Les autres variantes restent plus proches du résultat principal.
 
-Tous les centres restent positifs, entre environ +1,20 et +2,23 points. La ligne principale donne +1,506 point. L’analyse sans `TrafficType` monte à +2,233 points avec un intervalle de 0,535 à 3,931. La population complète, l’exclusion des doublons et la restriction au support commun donnent des centres proches de +1,20 à +1,56 point. Enfin, les forêts aléatoires pour les modèles de nuisance donnent +1,74 point, avec un intervalle de 0,12 à 3,35.
+La direction générale change donc peu, mais l’ampleur et les intervalles changent. Dans la plupart des cas, l’intervalle contient zéro. Dans deux variantes, il ne le contient pas. Je ne dois pas choisir uniquement ces deux variantes parce qu’elles donnent un résultat plus favorable; l’analyse principale reste celle annoncée depuis le début.
 
-La direction des centres est donc assez stable, mais leur amplitude et surtout la conclusion statistique varient : la plupart des intervalles contiennent zéro, tandis que ceux sans `TrafficType` et avec forêt aléatoire l’excluent. Il serait incorrect de choisir après coup uniquement le scénario dont l’intervalle est positif; l’analyse principale doit rester la référence.
+L’E-value du résultat principal vaut 1,412. Sans entrer dans le détail de la formule, cette valeur n’est pas très grande. Elle indique qu’une information absente ayant un lien modéré avec le weekend et avec l’achat pourrait suffire à expliquer le résultat central. L’E-value liée à l’intervalle vaut 1,00 puisque celui-ci contient déjà zéro.
 
-L’E-value du point vaut 1,412. Intuitivement, une variable non mesurée associée à la fois au weekend et à l’achat par des rapports de risque d’environ 1,41 pourrait suffire à expliquer le centre estimé, au-delà des covariables ajustées. L’E-value de la borne est 1,00 puisque l’intervalle principal atteint déjà le nul. La résistance à la confusion cachée est donc limitée.
-
-Les limites fondamentales restent celles de l’encadré orange : Weekend n’est pas assigné, les promotions, prix et intentions sont absents, le statut causal de `TrafficType` est ambigu, et le site ainsi que plusieurs catégories sont anonymes. Les sensibilités rendent ces fragilités visibles; elles ne les suppriment pas. Elles conduisent donc à une conclusion prudente : un signal cohérent, mais insuffisant pour une affirmation causale ferme.
-
-
-VERSION 2 — FIL CONDUCTEUR EN POINTS
-
-1. But de la diapositive : modifier plusieurs choix raisonnables et observer ce qui change.
-
-2. Graphique :
-   - point orange = estimation AIPW ;
-   - barre = intervalle ;
-   - ligne verticale = zéro.
-
-3. Six scénarios de sensibilité, sans en choisir un après coup comme « meilleur ».
-
-4. Tous les centres restent positifs : environ +1,20 à +2,23 points.
-
-5. Analyse principale : +1,506 [−0,176; 3,188].
-
-6. Sans `TrafficType` : +2,233 [0,535; 3,931].
-
-7. Population complète, sans doublons et support commun : centres proches de +1,20 à +1,56.
-
-8. Forêt aléatoire pour les nuisances : +1,74 [0,12; 3,35].
-
-9. Ce qui paraît stable : direction positive des estimations centrales.
-
-10. Ce qui varie : amplitude et inclusion ou non de zéro dans les intervalles.
-
-11. Ne pas sélectionner uniquement les deux scénarios dont l’IC est positif.
-
-12. L’analyse principale reste la référence annoncée à l’avance.
-
-13. E-value du point : 1,412.
-
-14. Intuition : une confusion non mesurée de force modérée pourrait expliquer le centre estimé.
-
-15. E-value de la borne : 1,00, car l’IC principal contient déjà zéro.
-
-16. Encadré orange — limites :
-    - Weekend non assigné ;
-    - promotions, prix et intention absents ;
-    - statut de `TrafficType` ambigu ;
-    - site et catégories anonymes.
-
-17. Les sensibilités montrent les fragilités; elles ne les corrigent pas.
-
-18. Conclusion : signal cohérent, mais affirmation causale ferme non justifiée.
-
-19. Transition : répondre finalement à la question de départ avec une conclusion proportionnée.
-
-REPÈRE AVEC L’ÉCRAN
-- Commencer par le graphique et la ligne principale en haut.
-- Descendre rapidement sur les cinq variantes, sans lire chaque intervalle en entier.
-- Passer à l’encadré bleu « Ce qui varie » pour résumer les amplitudes et l’E-value.
-- Terminer par l’encadré orange « Ce qui limite ».
-- Utiliser le titre pour résumer : l’amplitude varie, la prudence reste la même.
+Les limites à droite restent donc essentielles : le weekend n’a pas été attribué au hasard, les promotions, les prix et l’intention d’achat sont absents, le rôle de `TrafficType` est incertain, et le site est anonyme. Ces vérifications montrent où le résultat est fragile, mais elles ne suppriment pas ces problèmes.
 
 
 ------------------------------------------------------------
-DIAPOSITIVE 10 — CONCLUSION ET REPRODUCTIBILITÉ
+DIAPOSITIVE 10 — CONCLUSION
 Durée visée : environ 1 minute 20 à 1 minute 35
 ------------------------------------------------------------
 
-VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+Pour répondre à la question de départ, dans les sessions existantes où `SpecialDay=0`, les données suggèrent un faible contraste positif du weekend, mais elles ne permettent pas d’établir un effet causal moyen différent de zéro.
 
-Pour répondre à la question de départ, dans les sessions existantes hors proximité d’un jour commercial spécial, les données suggèrent un faible contraste positif du weekend, mais elles n’établissent pas un effet causal moyen différent de zéro.
+L’estimation principale est de +1,506 point, avec un intervalle allant de −0,176 à 3,188 points. Le bon recouvrement, l’amélioration de l’équilibre et les différentes vérifications rendent l’analyse plus crédible pour les variables observées. Ils ne peuvent cependant pas remplacer les promotions, les prix, l’intention d’achat ou d’autres informations manquantes.
 
-L’estimation AIPW principale est de +1,506 point de probabilité de transaction, avec un intervalle à 95 % de −0,176 à 3,188 points. Le recouvrement des scores, l’équilibre après pondération et l’accord des estimateurs ajustés renforcent la cohérence de l’analyse sur les variables mesurées. Ils ne compensent toutefois pas les promotions, les prix, l’intention d’achat ou d’autres confondeurs absents des données observationnelles.
+Le travail reste reproductible. Le fichier UCI et son empreinte ont été vérifiés, la graine utilisée est `20260715`, le cross-fitting comporte cinq parties et les figures, tableaux et dépendances sont documentés.
 
-Le travail est reproductible : le CSV UCI et son empreinte SHA-256 ont été vérifiés, la graine utilisée est `20260715`, le cross-fitting comporte cinq plis, et les figures, tableaux et dépendances sont documentés.
+Il faut aussi rester dans la portée du projet. J’étudie la probabilité qu’une session existante se transforme en achat. Je n’étudie ni le nombre de visiteurs attirés, ni le montant dépensé, ni la rentabilité d’une campagne. Cette étude seule ne suffit donc pas pour recommander de déplacer une stratégie commerciale vers le weekend.
 
-La portée pratique reste étroite. Cette étude concerne la probabilité de conversion de sessions existantes dans la population `SpecialDay=0`; elle ne mesure ni le nombre de visites générées, ni le montant des ventes, ni la rentabilité d’une campagne. Elle ne suffit donc pas, à elle seule, pour recommander de déplacer une stratégie commerciale vers le weekend.
-
-La conclusion finale est un signal causal possible et quantitativement faible, qui devrait être confirmé par une expérience randomisée ou par des données temporelles plus riches incluant notamment les prix, les promotions et un suivi fiable des utilisateurs. Je vous remercie pour votre attention.
-
-
-VERSION 2 — FIL CONDUCTEUR EN POINTS
-
-1. Revenir explicitement à la question de départ.
-
-2. Population concernée : sessions existantes avec `SpecialDay=0`.
-
-3. Conclusion générale : faible contraste positif suggéré.
-
-4. Ne pas dire : effet causal différent de zéro établi.
-
-5. Chiffre principal exact : AIPW = +1,506 point.
-
-6. IC exact à 95 % : [−0,176; 3,188] — zéro inclus.
-
-7. Ce qui renforce l’analyse sur les variables mesurées :
-   - bon recouvrement ;
-   - équilibre après IPW ;
-   - centres ajustés proches ;
-   - analyses de sensibilité explicites.
-
-8. Ce que cela ne corrige pas : promotions, prix, intention d’achat et autres confondeurs absents.
-
-9. Partie « Reproductibilité » :
-   - CSV UCI et SHA-256 vérifiés ;
-   - graine `20260715` ;
-   - cross-fitting à cinq plis ;
-   - figures, tableaux et dépendances documentés.
-
-10. Portée limitée : conversion des sessions existantes hors jours spéciaux.
-
-11. Ne mesure pas le nombre de visites, le montant des ventes ou la rentabilité d’une campagne.
-
-12. Donc : aucune recommandation de déplacer une campagne sur cette étude seule.
-
-13. Suite idéale : expérience randomisée ou données temporelles plus riches.
-
-14. Dernière idée : signal causal possible, quantitativement faible, à confirmer.
-
-15. Remercier le professeur.
-
-REPÈRE AVEC L’ÉCRAN
-- Commencer par lire avec ses propres mots la grande conclusion du haut.
-- Passer au bloc orange « Interprétation » et donner le chiffre principal.
-- Aller au bloc vert « Reproductibilité » pour montrer la traçabilité du travail.
-- Utiliser le bandeau gris pour rappeler que les diagnostics ne remplacent pas les variables absentes.
-- Terminer sur la portée pratique et la nécessité d’une confirmation future.
+Ma conclusion finale est qu’il existe un signal possible, mais faible et incertain. Pour aller plus loin, il faudrait une expérience mieux contrôlée ou des données plus riches sur les prix, les promotions et le suivi des utilisateurs. Je vous remercie pour votre attention.
 
 
 ============================================================
-REPÈRES TEMPORELS POUR L’ENSEMBLE DE LA PRÉSENTATION
+REPÈRES TEMPORELS
 ============================================================
 
 - Fin de l’introduction : environ 0 min 55.
@@ -668,5 +178,4 @@ REPÈRES TEMPORELS POUR L’ENSEMBLE DE LA PRÉSENTATION
 - Fin de la diapositive 8 : environ 11 minutes.
 - Fin de la diapositive 9 : environ 12 min 45.
 - Fin de la conclusion : environ 14 min 15 à 14 min 30.
-- Les respirations, changements de diapositive et petites reformulations doivent conduire près de 15 minutes sans dépasser.
-------------------------------------------------------------
+- Les transitions et les respirations permettent d’approcher les 15 minutes sans dépasser.

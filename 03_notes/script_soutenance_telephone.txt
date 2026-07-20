@@ -2,7 +2,8 @@ SOUTENANCE — REPÈRES POUR LE TÉLÉPHONE
 Projet d’inférence causale sur les sessions d’achat en ligne
 Durée totale disponible : 15 minutes
 
-Ce fichier contient uniquement les fils conducteurs à consulter pendant la présentation.
+Ce fichier contient uniquement les points à consulter pendant la présentation.
+Ce sont des idées à développer avec tes propres mots, pas des phrases à réciter.
 
 ============================================================
 INTRODUCTION — ENVIRON 50 SECONDES À 1 MINUTE
@@ -96,164 +97,147 @@ REPÈRE AVEC L’ÉCRAN
 
 
 ------------------------------------------------------------
-DIAPOSITIVE 3 — DAG ET CHOIX DES VARIABLES D’AJUSTEMENT
+DIAPOSITIVE 3 — DAG ET CHOIX DES VARIABLES
 Durée visée : environ 1 minute 30 à 1 minute 45
 ------------------------------------------------------------
 
-1. Transition depuis la cible : décider maintenant quelles variables ajuster.
+1. Ce schéma m’a servi à organiser les variables.
 
-2. DAG = carte des hypothèses causales et de l’ordre temporel.
+2. Idée principale : séparer ce qui existe avant la session de ce qui arrive pendant ou après.
 
-3. Ne pas le présenter comme une preuve issue des données ni comme un simple graphique de corrélations.
+3. Ne pas essayer d’expliquer chaque flèche.
 
-4. Commencer au centre :
-   - orange = `Weekend`, exposition ;
-   - rouge = `Revenue`, résultat.
+4. Au centre :
+   - orange = `Weekend` ;
+   - rouge = `Revenue`.
 
-5. Passer aux nœuds verts à gauche : caractéristiques supposées antérieures à l’exposition.
+5. À gauche, en vert : calendrier, profil du visiteur et canal de trafic.
 
-6. Calendrier → principalement `Month`.
+6. Ces informations sont considérées comme déjà présentes avant la comparaison.
 
-7. Profil visiteur → `VisitorType`, `Region`, `OperatingSystems`, `Browser`.
+7. Je les utilise pour rapprocher les groupes semaine et weekend.
 
-8. Canal trafic → `TrafficType`.
+8. À droite, en gris : navigation et `PageValues`.
 
-9. Intuition de la porte arrière : ces variables peuvent influencer à la fois Weekend et Revenue.
+9. Ces informations apparaissent pendant la visite ou sont très proches de l’achat.
 
-10. Décision affichée en bas : ajuster calendrier, profil et trafic pour bloquer ces chemins de confusion.
+10. Les ajouter risquerait de mélanger les causes possibles et les conséquences de la session.
 
-11. Nœuds gris à droite : navigation et `PageValues`, mesurées pendant ou après la session.
+11. Choix du projet : ne pas les utiliser dans l’ajustement principal.
 
-12. Pourquoi les exclure :
-    - médiateur → risque de bloquer une partie de l’effet total ;
-    - collider → risque de créer un biais ;
-    - `PageValues` → possible fuite d’information liée au résultat.
+12. En haut, en gris : promotions, prix et intention d’achat non disponibles.
 
-13. Nœuds gris du haut : promotions, prix et intention d’achat non observés.
+13. Limite importante : impossible de corriger directement une information absente.
 
-14. Limite : aucune méthode ne peut ajuster directement ce qui manque dans le fichier.
+14. `TrafficType` est moins clair : gardé d’abord, puis résultat vérifié sans cette variable.
 
-15. Point ambigu : ordre temporel de `TrafficType` pas totalement certain.
+15. Ne pas dire que le DAG prouve les relations : il montre surtout mon raisonnement.
 
-16. Choix du projet : inclus dans l’analyse principale, puis retiré dans une sensibilité.
-
-17. Transition : DAG raisonné, donc ajout d’un second regard exploratoire avec FCI.
+16. Transition : utiliser FCI comme deuxième regard sur les données.
 
 REPÈRE AVEC L’ÉCRAN
-- Partir de `Weekend` en orange et de `Revenue` en rouge.
-- Aller vers les trois nœuds verts, puis lire « Ajuster » dans le bandeau inférieur.
-- Passer aux nœuds gris de droite, puis lire « Exclure ».
-- Terminer par les deux nœuds gris du haut et la colonne « Non observé ».
-- Ne pas essayer de suivre chaque flèche une par une : expliquer les familles de variables.
+- Commencer par Weekend orange et Revenue rouge.
+- Aller vers les trois cercles verts et la mention « Ajuster ».
+- Passer aux cercles gris de droite et à la mention « Exclure ».
+- Terminer par les informations manquantes en haut.
+- Parler des groupes de variables, pas de toutes les flèches.
 
 
 ------------------------------------------------------------
-DIAPOSITIVE 4 — FCI ET PAG EXPLORATOIRE
-Durée visée : environ 1 minute 20 à 1 minute 35
+DIAPOSITIVE 4 — FCI COMME ANALYSE EXPLORATOIRE
+Durée visée : environ 1 minute 15 à 1 minute 30
 ------------------------------------------------------------
 
-1. Lien avec la diapositive précédente : DAG construit à partir du raisonnement de domaine.
+1. Le DAG venait surtout de mon raisonnement.
 
-2. FCI = Fast Causal Inference.
+2. FCI apporte une deuxième vue, davantage basée sur les liens trouvés dans les données.
 
-3. Intuition : partir des indépendances observées pour explorer les relations encore compatibles avec les données.
+3. FCI accepte aussi que certaines causes importantes puissent manquer dans le fichier.
 
-4. Particularité : FCI autorise l’existence de causes cachées ou variables latentes.
+4. Le dessin produit par FCI s’appelle un PAG.
 
-5. Encadré bleu à droite — configuration :
-   - six variables regroupées ;
-   - 12 330 sessions complètes ;
-   - test G² d’indépendance conditionnelle ;
-   - seuil principal de 1 % ;
-   - contraintes temporelles.
+5. Six grandes catégories de variables ont été utilisées.
 
-6. Résultat = PAG, une carte de relations parfois seulement partiellement orientées.
+6. Les réglages sont affichés dans l’encadré bleu — pas besoin de détailler le test G².
 
-7. Légende du bas : directions imposées, partielles ou indéterminées.
+7. Certaines directions restent incertaines : le graphe ne prétend pas tout connaître.
 
-8. Ne pas expliquer chaque arête; se concentrer sur `Weekend` orange et `Revenue` rouge.
+8. Se concentrer sur Weekend orange et Revenue rouge.
 
-9. Observation principale : aucune arête directe entre Weekend et Revenue.
+9. Résultat visible : aucune ligne directe entre les deux.
 
-10. Robustesse interne : même absence aux trois seuils testés.
+10. Même observation avec les trois réglages testés.
 
-11. Attention : absence d’arête directe ≠ effet total nul.
+11. Attention : absence de ligne directe ≠ absence totale d’effet.
 
-12. Un effet pourrait passer par un chemin indirect.
+12. Un lien pourrait passer par d’autres variables.
 
-13. Autres limites : regroupement, discrétisation, puissance des tests, contraintes et hypothèses de FCI.
+13. Le résultat dépend aussi des regroupements et des choix de la méthode.
 
-14. Population différente : PAG sur les 12 330 sessions; AIPW principale dans `SpecialDay=0`.
+14. Conclusion : FCI est une exploration supplémentaire, pas une preuve.
 
-15. Conclusion : FCI complète le DAG, mais ne le remplace pas et ne réfute pas l’AIPW.
+15. Pour l’analyse principale, le DAG reste la base du choix des variables.
 
-16. Transition : revenir au DAG pour définir formellement l’effet et les méthodes d’estimation.
+16. Transition : expliquer maintenant précisément ce que l’on calcule.
 
 REPÈRE AVEC L’ÉCRAN
-- Commencer par l’encadré « Analyse exploratoire » à droite.
-- Montrer ensuite le PAG et identifier seulement Weekend et Revenue.
-- Faire constater visuellement l’absence de ligne directe entre eux.
-- Utiliser l’encadré orange « Lecture prudente » pour donner immédiatement la limite.
-- Finir par la transition vers le cadre Pearl/Rubin.
+- Commencer par l’encadré bleu « Analyse exploratoire ».
+- Montrer Weekend et Revenue sur le graphe.
+- Faire remarquer l’absence de ligne directe.
+- Lire ensuite l’idée de l’encadré orange « Lecture prudente ».
 
 
 ------------------------------------------------------------
-DIAPOSITIVE 5 — CADRE PEARL/RUBIN ET ESTIMATION
-Durée visée : environ 1 minute 50 à 2 minutes 05
+DIAPOSITIVE 5 — CE QUE NOUS CHERCHONS ET COMMENT NOUS LE CALCULONS
+Durée visée : environ 1 minute 45 à 2 minutes
 ------------------------------------------------------------
 
-1. Deux cadres complémentaires :
-   - Pearl → DAG, porte arrière, choix des variables ;
-   - Rubin → résultats potentiels, définition du contraste.
+1. La diapositive paraît technique, mais elle reprend la même question que depuis le début.
 
-2. Bloc bleu à gauche : formule de l’estimand, c’est-à-dire la quantité que l’on cherche.
+2. Dans la formule :
+   - `Y(1)` = situation weekend ;
+   - `Y(0)` = situation semaine.
 
-3. `Y(1)` = résultat potentiel si la session a lieu le weekend.
+3. On cherche leur différence moyenne pour `SpecialDay=0`.
 
-4. `Y(0)` = résultat potentiel si elle a lieu en semaine.
+4. La ligne Z contient les informations utilisées pour rendre la comparaison plus juste.
 
-5. `Y(1) − Y(0)` = différence conceptuelle pour une même session.
+5. Pearl = le schéma qui aide à choisir les variables.
 
-6. Espérance E = moyenne de ces différences.
+6. Rubin = l’idée des deux situations possibles pour une même session.
 
-7. Condition `SpecialDay=0` = population cible de 11 079 sessions.
+7. À droite, traduire les quatre conditions simplement :
+   - définition du weekend assez cohérente ;
+   - groupes assez comparables après ajustement ;
+   - semaine et weekend possibles pour les profils étudiés ;
+   - une session ne change pas directement le résultat d’une autre.
 
-8. Traduction simple : effet moyen du weekend sur la probabilité de transaction dans cette cible.
+8. Plus grande faiblesse : une information importante peut manquer dans la base.
 
-9. Ensemble Z affiché : `Month`, `VisitorType`, `Region`, `OperatingSystems`, `Browser`, `TrafficType`.
+9. En bas, quatre façons de regarder le même écart.
 
-10. Bloc gris — consistance : résultat observé cohérent avec le scénario réellement reçu; Weekend suffisamment bien défini.
+10. Brute = comparaison directe des taux.
 
-11. Échangeabilité conditionnelle : après Z, aucun confondeur important non mesuré.
+11. Standardisation = correction à partir du résultat.
 
-12. Insister : hypothèse la plus forte et non directement testable.
+12. IPW = donner plus ou moins de poids aux sessions selon leur profil.
 
-13. Positivité : pour chaque profil, possibilité d’observer semaine et weekend.
+13. AIPW = combiner les deux approches précédentes.
 
-14. Absence d’interférence : une session ne modifie pas le résultat d’une autre.
+14. Cross-fitting = séparer les données en plusieurs parties pour éviter de trop dépendre des mêmes observations.
 
-15. Ligne du bas — quatre regards sur le même contraste :
-    - brute → aucune correction ;
-    - standardisation → modèle du résultat ;
-    - IPW de Hájek → modèle de l’exposition et poids normalisés ;
-    - AIPW → combinaison des deux modèles.
+15. AIPW choisie comme méthode principale, mais ce n’est pas une méthode magique.
 
-16. AIPW principale : deux modèles + cross-fitting en cinq plis pour limiter le surajustement.
+16. Elle ne corrige toujours pas les variables absentes.
 
-17. Double robustesse : protection contre la mauvaise spécification d’un des deux modèles de nuisance, sous les autres hypothèses.
-
-18. Limite obligatoire : aucune protection contre un confondeur non mesuré ou un DAG erroné.
-
-19. Relier à la phrase rouge : interprétation causale dépendante d’hypothèses non testables.
-
-20. Transition : vérifier maintenant que des profils comparables existent dans les deux groupes → scores de propension.
+17. Transition : vérifier si les groupes peuvent réellement être comparés.
 
 REPÈRE AVEC L’ÉCRAN
-- Commencer par le bloc bleu : formule, traduction, puis ensemble Z.
-- Passer au bloc gris et expliquer les quatre hypothèses dans l’ordre affiché.
-- Descendre sur la ligne des quatre méthodes, de gauche à droite.
-- S’arrêter un peu plus sur l’AIPW orange, puisque c’est la méthode principale.
-- Terminer en montrant la phrase rouge, puis annoncer le contrôle du recouvrement.
+- Bloc bleu : traduire la formule, sans la lire symbole par symbole.
+- Bloc gris : expliquer les quatre conditions avec des mots simples.
+- Ligne du bas : parcourir les quatre méthodes de gauche à droite.
+- S’arrêter un peu plus sur l’AIPW orange.
+- Terminer par la phrase rouge sur les hypothèses.
 
 
 ------------------------------------------------------------
@@ -261,248 +245,217 @@ DIAPOSITIVE 6 — SCORE DE PROPENSION ET RECOUVREMENT
 Durée visée : environ 1 minute à 1 minute 10
 ------------------------------------------------------------
 
-1. Reprendre l’hypothèse précédente : positivité à vérifier dans les données.
+1. Score de propension = chance estimée qu’une session ait lieu le weekend selon son profil.
 
-2. Score de propension = probabilité estimée qu’une session ait lieu le weekend, compte tenu de Z.
+2. Attention : ce n’est pas la probabilité d’achat.
 
-3. Attention : ce n’est pas la probabilité d’achat.
+3. Bleu = semaine; orange = weekend.
 
-4. Axe horizontal du graphique = probabilité estimée de Weekend.
+4. Les deux couleurs se superposent largement.
 
-5. Histogrammes :
-   - bleu = sessions de semaine ;
-   - orange = sessions de weekend.
+5. Signification : beaucoup de profils existent réellement dans les deux groupes.
 
-6. Large zone commune = profils comparables réellement présents dans les deux groupes.
+6. La comparaison repose donc sur de vraies sessions comparables.
 
-7. Sans recouvrement : extrapolation du modèle et poids potentiellement extrêmes.
+7. Scores approximativement de 0,05 à 0,92.
 
-8. Encadré gris : scores approximativement de 0,05 à 0,92.
+8. Seulement neuf observations sous 0,05.
 
-9. Encadré orange :
-   - neuf observations sous 0,05 ;
-   - aucune au-dessus de 0,95.
+9. Aucune observation au-dessus de 0,95.
 
-10. Interprétation : très peu de sessions presque certaines d’appartenir à un seul groupe.
+10. Conclusion : comparaison possible dans la population `SpecialDay=0`.
 
-11. Conclusion limitée : positivité pratique crédible dans la population `SpecialDay=0`.
+11. Limite : ce graphique ne détecte pas les informations absentes de la base.
 
-12. Ne pas conclure à l’échangeabilité ou à l’absence de confondeurs cachés.
-
-13. Transition : le recouvrement permet les poids; vérifier maintenant s’ils équilibrent les covariables.
+12. Transition : vérifier si la pondération rapproche effectivement les groupes.
 
 REPÈRE AVEC L’ÉCRAN
-- Commencer par définir le score en utilisant l’axe horizontal.
-- Montrer la superposition bleue et orange au centre du graphique.
-- Passer aux deux encadrés chiffrés à droite.
-- Terminer par la phrase noire : le diagnostic ne renseigne pas sur la confusion cachée.
+- Définir le score avec l’axe horizontal.
+- Montrer la superposition bleue et orange.
+- Lire les deux encadrés chiffrés à droite.
+- Finir par la limite écrite en noir.
 
 
 ------------------------------------------------------------
-DIAPOSITIVE 7 — ÉQUILIBRE DES COVARIABLES APRÈS IPW
+DIAPOSITIVE 7 — ÉQUILIBRE APRÈS PONDÉRATION
 Durée visée : environ 55 secondes à 1 minute 05
 ------------------------------------------------------------
 
-1. Recouvrement suffisant → calcul des poids IPW possible.
+1. L’IPW donne un poids différent aux sessions pour rapprocher les groupes.
 
-2. Objectif de l’IPW : rendre les groupes plus comparables sur les covariables observées.
+2. SMD = mesure de la distance entre semaine et weekend pour chaque variable.
 
-3. SMD = différence moyenne standardisée entre semaine et weekend.
+3. Plus le point est proche de zéro, plus les groupes se ressemblent.
 
-4. Zéro sur l’axe = équilibre parfait pour la modalité concernée.
+4. Lignes pointillées = limite habituelle de 0,10.
 
-5. Lignes pointillées à ±0,10 = seuil usuel de déséquilibre préoccupant.
+5. Rouge = avant pondération.
 
-6. Points rouges = avant pondération.
+6. Avant : plus grand écart de 0,268.
 
-7. Avant IPW : SMD absolu maximal de 0,268.
+7. Vert = après pondération.
 
-8. Points verts = après pondération, tous rapprochés de zéro.
+8. Après : plus grand écart de 0,040.
 
-9. Après IPW : SMD absolu maximal de 0,040.
+9. Aucun point vert ne dépasse 0,10.
 
-10. Aucune modalité au-dessus de |SMD| = 0,10 après pondération.
+10. Conclusion : groupes bien rapprochés sur les variables présentes dans le modèle.
 
-11. Conclusion : bon équilibre des covariables incluses dans le modèle.
+11. Limite : aucune garantie pour les prix, promotions ou intentions absents.
 
-12. Limite : aucun équilibre garanti pour les variables non observées.
-
-13. Transition : support et équilibre vérifiés → lire l’estimation principale et son incertitude.
+12. Transition : présenter maintenant l’estimation principale.
 
 REPÈRE AVEC L’ÉCRAN
-- Définir le SMD en montrant l’axe horizontal et le zéro central.
-- Montrer les lignes pointillées à ±0,10.
-- Comparer visuellement les points rouges aux points verts.
-- Lire ensuite l’encadré « 0,268 → 0,040 ».
-- Finir par l’encadré bleu qui limite la conclusion aux covariables observées.
+- Montrer le zéro central et les deux lignes pointillées.
+- Comparer les points rouges aux points verts.
+- Lire « 0,268 → 0,040 ».
+- Terminer par la limite dans l’encadré bleu.
 
 
 ------------------------------------------------------------
-DIAPOSITIVE 8 — RÉSULTAT PRINCIPAL AIPW
+DIAPOSITIVE 8 — RÉSULTAT PRINCIPAL
 Durée visée : environ 1 minute 25 à 1 minute 40
 ------------------------------------------------------------
 
-1. Graphique principal :
-   - point = estimation centrale ;
-   - ligne horizontale = intervalle de confiance à 95 % ;
-   - ligne verticale à zéro = absence d’effet moyen.
+1. Point = différence estimée; ligne horizontale = incertitude autour du résultat.
 
-2. Première ligne — différence brute observée : +2,026 points.
+2. Ligne verticale zéro = aucune différence moyenne.
 
-3. IC brut : [0,378; 3,674] — association descriptive, sans ajustement.
+3. Différence brute : +2,026 points.
 
-4. Trois centres ajustés proches :
-   - standardisation : +1,384 ;
-   - IPW : +1,444 ;
-   - AIPW : +1,506 point.
+4. Méthodes ajustées : résultats proches, entre +1,384 et +1,506 point.
 
-5. Accord utile entre méthodes, mais pas validation automatique de leurs hypothèses communes.
+5. C’est rassurant, mais cela ne transforme pas le résultat en certitude.
 
-6. Encadré orange — résultat principal AIPW : +1,506 point.
+6. Résultat principal AIPW : +1,506 point.
 
-7. IC exact à 95 % : [−0,176; 3,188].
+7. Intervalle exact : [−0,176; 3,188].
 
 8. Valeurs arrondies visibles : +1,51 et [−0,18; 3,19].
 
-9. Encadré gris — moyennes potentielles estimées :
+9. Taux estimés après ajustement :
    - weekend : 17,67 % ;
    - semaine : 16,16 %.
 
-10. Ne pas les confondre avec les taux bruts observés : 18,06 % et 16,03 %.
+10. Ne pas confondre avec les taux bruts : 18,06 % et 16,03 %.
 
-11. Différence entre moyennes potentielles = estimation AIPW de 1,506 point.
+11. L’intervalle AIPW traverse zéro.
 
-12. L’IC AIPW traverse zéro.
+12. Donc : impossible d’affirmer que le weekend augmente réellement les achats.
 
-13. Conclusion permise : impossible d’établir un effet moyen différent de zéro.
+13. Ne pas dire non plus que le weekend n’a aucun effet.
 
-14. Conclusion interdite : « le weekend n’a aucun effet ».
+14. Bonne conclusion : petit signal positif, mais encore incertain.
 
-15. Valeurs compatibles : petite baisse jusqu’à hausse d’environ 3,19 points, sous hypothèses.
-
-16. Message central : signal positif modeste, mais incertitude importante.
-
-17. Transition : tester maintenant la dépendance du résultat aux choix raisonnables d’analyse.
+15. Transition : vérifier si ce message change avec d’autres choix d’analyse.
 
 REPÈRE AVEC L’ÉCRAN
-- Commencer par la ligne verticale zéro, puis expliquer les points et intervalles.
-- Lire le graphique du haut vers le bas : brute, standardisation, IPW, AIPW.
-- Passer à l’encadré orange pour annoncer le résultat principal exact puis arrondi.
-- Descendre vers les deux moyennes potentielles dans l’encadré gris.
-- Revenir au fait que l’intervalle principal traverse zéro.
+- Expliquer d’abord la ligne zéro et les intervalles.
+- Parcourir rapidement les quatre lignes du graphique.
+- Passer à l’encadré orange pour l’AIPW.
+- Descendre vers les taux estimés dans l’encadré gris.
+- Revenir au fait que l’intervalle traverse zéro.
 
 
 ------------------------------------------------------------
-DIAPOSITIVE 9 — ROBUSTESSE, E-VALUE ET LIMITES
-Durée visée : environ 1 minute 35 à 1 minute 50
+DIAPOSITIVE 9 — VÉRIFICATIONS, E-VALUE ET LIMITES
+Durée visée : environ 1 minute 30 à 1 minute 45
 ------------------------------------------------------------
 
-1. But de la diapositive : modifier plusieurs choix raisonnables et observer ce qui change.
+1. Chaque ligne = une autre façon raisonnable de refaire l’analyse.
 
-2. Graphique :
-   - point orange = estimation AIPW ;
-   - barre = intervalle ;
-   - ligne verticale = zéro.
+2. Tous les résultats centraux restent positifs.
 
-3. Six scénarios de sensibilité, sans en choisir un après coup comme « meilleur ».
+3. Ensemble : environ +1,20 à +2,23 points.
 
-4. Tous les centres restent positifs : environ +1,20 à +2,23 points.
+4. Analyse principale : +1,506 point.
 
-5. Analyse principale : +1,506 [−0,176; 3,188].
+5. Sans `TrafficType` : environ +2,23 points.
 
-6. Sans `TrafficType` : +2,233 [0,535; 3,931].
+6. Avec forêt aléatoire : environ +1,74 point.
 
-7. Population complète, sans doublons et support commun : centres proches de +1,20 à +1,56.
+7. Les autres variantes restent proches du résultat principal.
 
-8. Forêt aléatoire pour les nuisances : +1,74 [0,12; 3,35].
+8. Ce qui reste semblable : direction générale positive.
 
-9. Ce qui paraît stable : direction positive des estimations centrales.
+9. Ce qui change : taille de l’écart et intervalles.
 
-10. Ce qui varie : amplitude et inclusion ou non de zéro dans les intervalles.
+10. La plupart des intervalles contiennent zéro; deux ne le contiennent pas.
 
-11. Ne pas sélectionner uniquement les deux scénarios dont l’IC est positif.
+11. Ne pas choisir seulement les deux résultats les plus favorables.
 
-12. L’analyse principale reste la référence annoncée à l’avance.
+12. L’analyse principale reste la référence.
 
-13. E-value du point : 1,412.
+13. E-value = 1,412.
 
-14. Intuition : une confusion non mesurée de force modérée pourrait expliquer le centre estimé.
+14. Traduction simple : une information manquante de force modérée pourrait expliquer le résultat central.
 
-15. E-value de la borne : 1,00, car l’IC principal contient déjà zéro.
+15. E-value de la borne = 1,00, car l’intervalle principal contient déjà zéro.
 
-16. Encadré orange — limites :
-    - Weekend non assigné ;
+16. Limites visibles à droite :
+    - Weekend non attribué au hasard ;
     - promotions, prix et intention absents ;
-    - statut de `TrafficType` ambigu ;
-    - site et catégories anonymes.
+    - rôle de `TrafficType` incertain ;
+    - site anonyme.
 
-17. Les sensibilités montrent les fragilités; elles ne les corrigent pas.
+17. Ces vérifications montrent les fragilités, elles ne les suppriment pas.
 
-18. Conclusion : signal cohérent, mais affirmation causale ferme non justifiée.
-
-19. Transition : répondre finalement à la question de départ avec une conclusion proportionnée.
+18. Transition : donner une conclusion finale prudente.
 
 REPÈRE AVEC L’ÉCRAN
-- Commencer par le graphique et la ligne principale en haut.
-- Descendre rapidement sur les cinq variantes, sans lire chaque intervalle en entier.
-- Passer à l’encadré bleu « Ce qui varie » pour résumer les amplitudes et l’E-value.
-- Terminer par l’encadré orange « Ce qui limite ».
-- Utiliser le titre pour résumer : l’amplitude varie, la prudence reste la même.
+- Commencer par la première ligne du graphique.
+- Descendre rapidement sur les autres variantes.
+- Passer à l’encadré bleu pour résumer ce qui change.
+- Terminer par l’encadré orange des limites.
 
 
 ------------------------------------------------------------
-DIAPOSITIVE 10 — CONCLUSION ET REPRODUCTIBILITÉ
+DIAPOSITIVE 10 — CONCLUSION
 Durée visée : environ 1 minute 20 à 1 minute 35
 ------------------------------------------------------------
 
-1. Revenir explicitement à la question de départ.
+1. Revenir à la question de départ.
 
-2. Population concernée : sessions existantes avec `SpecialDay=0`.
+2. Population : sessions existantes avec `SpecialDay=0`.
 
-3. Conclusion générale : faible contraste positif suggéré.
+3. Conclusion : faible signal positif du weekend.
 
-4. Ne pas dire : effet causal différent de zéro établi.
+4. Mais aucun effet causal différent de zéro clairement établi.
 
-5. Chiffre principal exact : AIPW = +1,506 point.
+5. AIPW principale : +1,506 point.
 
-6. IC exact à 95 % : [−0,176; 3,188] — zéro inclus.
+6. Intervalle : [−0,176; 3,188] — zéro inclus.
 
-7. Ce qui renforce l’analyse sur les variables mesurées :
-   - bon recouvrement ;
-   - équilibre après IPW ;
-   - centres ajustés proches ;
-   - analyses de sensibilité explicites.
+7. Points rassurants : recouvrement, meilleur équilibre et résultats ajustés proches.
 
-8. Ce que cela ne corrige pas : promotions, prix, intention d’achat et autres confondeurs absents.
+8. Limite : rien de cela ne remplace les informations absentes.
 
-9. Partie « Reproductibilité » :
-   - CSV UCI et SHA-256 vérifiés ;
+9. Reproductibilité :
+   - fichier UCI et empreinte vérifiés ;
    - graine `20260715` ;
-   - cross-fitting à cinq plis ;
-   - figures, tableaux et dépendances documentés.
+   - cross-fitting en cinq parties ;
+   - résultats et dépendances documentés.
 
-10. Portée limitée : conversion des sessions existantes hors jours spéciaux.
+10. Portée : conversion de sessions existantes, pas nombre de visiteurs ou montant des ventes.
 
-11. Ne mesure pas le nombre de visites, le montant des ventes ou la rentabilité d’une campagne.
+11. Donc : ne pas recommander une campagne weekend sur cette étude seule.
 
-12. Donc : aucune recommandation de déplacer une campagne sur cette étude seule.
+12. Pour confirmer : expérience mieux contrôlée ou données plus riches.
 
-13. Suite idéale : expérience randomisée ou données temporelles plus riches.
+13. Dernière idée : signal possible, faible et incertain.
 
-14. Dernière idée : signal causal possible, quantitativement faible, à confirmer.
-
-15. Remercier le professeur.
+14. Remercier le professeur.
 
 REPÈRE AVEC L’ÉCRAN
-- Commencer par lire avec ses propres mots la grande conclusion du haut.
-- Passer au bloc orange « Interprétation » et donner le chiffre principal.
-- Aller au bloc vert « Reproductibilité » pour montrer la traçabilité du travail.
-- Utiliser le bandeau gris pour rappeler que les diagnostics ne remplacent pas les variables absentes.
-- Terminer sur la portée pratique et la nécessité d’une confirmation future.
+- Grande conclusion du haut avec tes propres mots.
+- Bloc orange : chiffre principal.
+- Bloc vert : reproductibilité.
+- Bandeau gris : limites des données observationnelles.
+- Finir sur ce qu’il faudrait pour confirmer le résultat.
 
 
 ============================================================
-REPÈRES TEMPORELS POUR L’ENSEMBLE DE LA PRÉSENTATION
+REPÈRES TEMPORELS
 ============================================================
 
 - Fin de l’introduction : environ 0 min 55.
@@ -512,5 +465,4 @@ REPÈRES TEMPORELS POUR L’ENSEMBLE DE LA PRÉSENTATION
 - Fin de la diapositive 8 : environ 11 minutes.
 - Fin de la diapositive 9 : environ 12 min 45.
 - Fin de la conclusion : environ 14 min 15 à 14 min 30.
-- Les respirations, changements de diapositive et petites reformulations doivent conduire près de 15 minutes sans dépasser.
-------------------------------------------------------------
+- Les transitions et les respirations permettent d’approcher les 15 minutes sans dépasser.
