@@ -32,13 +32,70 @@ INTRODUCTION — ENVIRON 50 SECONDES À 1 MINUTE
     - résultats ;
     - limites.
 
-ÉCRAN
-- Diapositive de titre affichée.
-- S’appuyer sur « inférence causale » et « intentions d’achat en ligne ».
-- Garder les méthodes et les chiffres pour leurs diapositives.
+REPÈRE AVEC L’ÉCRAN
+- La diapositive de titre reste affichée.
+- S’appuyer sur les mots « inférence causale » et « intentions d’achat en ligne ».
+- Ne pas annoncer les méthodes ou les chiffres : ils seront expliqués sur leurs diapositives.
 
 
 ------------------------------------------------------------
-ARRÊT POUR VALIDATION DU FORMAT
-La diapositive 1 ne sera ajoutée qu’après validation de cette approche.
+DIAPOSITIVE 2 — QUESTION CAUSALE ET POPULATION CIBLE
+Durée visée : environ 1 minute 25 à 1 minute 40
+------------------------------------------------------------
+
+1. Repartir de la question affichée à gauche : effet moyen du weekend sur la conversion d’une session.
+
+2. Unité étudiée : une session de navigation.
+
+3. Montrer les deux variables en bas à gauche :
+   - T = `Weekend` — exposition ;
+   - Y = `Revenue` — transaction oui/non.
+
+4. Effet recherché : différence moyenne de probabilité d’achat, pas montant dépensé.
+
+5. Intervention hypothétique : sessions comparables placées le weekend plutôt qu’en semaine.
+
+6. Pas une expérience randomisée réelle.
+
+7. Encadré gris : 12 330 sessions dans la base complète.
+
+8. Nuance sur « une session = un utilisateur » :
+   - utilisateurs distincts selon la documentation UCI ;
+   - aucun identifiant dans le CSV pour le vérifier directement.
+
+9. Passer au graphique de droite : `SpecialDay` = proximité d’un jour commercial spécial.
+
+10. Valeurs non nulles : très mauvais recouvrement entre semaine et weekend.
+
+11. Problème concret : comparer ces zones obligerait le modèle à extrapoler presque sans observations comparables.
+
+12. Revenir à la ligne « Cible » : restriction à `SpecialDay=0`.
+
+13. Population principale : 11 079 sessions hors proximité mesurée d’un jour commercial spécial.
+
+14. Avantage : comparaison plus crédible.
+
+15. Prix à payer : conclusion limitée à cette population, pas à toutes les sessions.
+
+16. Graphique central — taux bruts dans cette cible :
+    - semaine : 16,03 % ;
+    - weekend : 18,06 %.
+
+17. Différence brute : +2,026 points de pourcentage.
+
+18. Prudence indispensable : chiffres descriptifs — ni AIPW ajustée, ni preuve causale.
+
+19. Transition : déterminer les différences préexistantes à ajuster sans contrôler les conséquences du weekend → DAG suivant.
+
+REPÈRE AVEC L’ÉCRAN
+- Commencer par le texte de gauche, puis descendre vers T, Y et les effectifs.
+- Aller ensuite au graphique `SpecialDay` à droite pour justifier la restriction.
+- Revenir à « Cible : SpecialDay = 0 • N = 11 079 ».
+- Terminer par les deux barres centrales et leur interprétation descriptive.
+- Ne pas confondre ces taux avec les moyennes potentielles AIPW présentées plus tard.
+
+
+------------------------------------------------------------
+ARRÊT APRÈS LA DIAPOSITIVE 2
+La diapositive 3 sera ajoutée après validation de cette partie.
 ------------------------------------------------------------

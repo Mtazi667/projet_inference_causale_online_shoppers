@@ -57,6 +57,80 @@ REPÈRE AVEC L’ÉCRAN
 
 
 ------------------------------------------------------------
-ARRÊT POUR VALIDATION DU FORMAT
-La diapositive 1 ne sera ajoutée qu’après validation de cette approche.
+DIAPOSITIVE 2 — QUESTION CAUSALE ET POPULATION CIBLE
+Durée visée : environ 1 minute 25 à 1 minute 40
+------------------------------------------------------------
+
+VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+
+Cette diapositive précise l’effet recherché. L’unité est une session de navigation : `Weekend`, noté T, est l’exposition, et `Revenue`, noté Y, indique si elle se termine par une transaction.
+
+Nous cherchons la différence moyenne de probabilité d’achat si des sessions comparables avaient lieu le weekend plutôt qu’en semaine. C’est une intervention hypothétique, pas une expérience randomisée.
+
+La base contient 12 330 sessions. UCI indique une session par utilisateur distinct durant l’année, mais le CSV anonymisé ne fournit aucun identifiant pour le vérifier directement.
+
+À droite, `SpecialDay` mesure la proximité d’un jour commercial spécial. Ses valeurs non nulles se recouvrent très mal entre semaine et weekend : certaines sont presque réservées à un seul groupe. Les conserver obligerait le modèle à extrapoler sans observations vraiment comparables.
+
+L’analyse principale cible donc les 11 079 sessions où `SpecialDay=0`, hors proximité mesurée d’un jour spécial. La comparaison devient plus crédible, mais la conclusion concerne uniquement cette population.
+
+Au centre, les taux bruts sont de 16,03 % en semaine et de 18,06 % le weekend, soit un écart de 2,026 points. Ces chiffres sont descriptifs : ce ne sont ni l’AIPW ajustée ni une preuve causale. Le DAG suivant déterminera les différences préexistantes à ajuster.
+
+
+VERSION 2 — FIL CONDUCTEUR EN POINTS
+
+1. Repartir de la question affichée à gauche : effet moyen du weekend sur la conversion d’une session.
+
+2. Unité étudiée : une session de navigation.
+
+3. Montrer les deux variables en bas à gauche :
+   - T = `Weekend` — exposition ;
+   - Y = `Revenue` — transaction oui/non.
+
+4. Effet recherché : différence moyenne de probabilité d’achat, pas montant dépensé.
+
+5. Intervention hypothétique : sessions comparables placées le weekend plutôt qu’en semaine.
+
+6. Pas une expérience randomisée réelle.
+
+7. Encadré gris : 12 330 sessions dans la base complète.
+
+8. Nuance sur « une session = un utilisateur » :
+   - utilisateurs distincts selon la documentation UCI ;
+   - aucun identifiant dans le CSV pour le vérifier directement.
+
+9. Passer au graphique de droite : `SpecialDay` = proximité d’un jour commercial spécial.
+
+10. Valeurs non nulles : très mauvais recouvrement entre semaine et weekend.
+
+11. Problème concret : comparer ces zones obligerait le modèle à extrapoler presque sans observations comparables.
+
+12. Revenir à la ligne « Cible » : restriction à `SpecialDay=0`.
+
+13. Population principale : 11 079 sessions hors proximité mesurée d’un jour commercial spécial.
+
+14. Avantage : comparaison plus crédible.
+
+15. Prix à payer : conclusion limitée à cette population, pas à toutes les sessions.
+
+16. Graphique central — taux bruts dans cette cible :
+    - semaine : 16,03 % ;
+    - weekend : 18,06 %.
+
+17. Différence brute : +2,026 points de pourcentage.
+
+18. Prudence indispensable : chiffres descriptifs — ni AIPW ajustée, ni preuve causale.
+
+19. Transition : déterminer les différences préexistantes à ajuster sans contrôler les conséquences du weekend → DAG suivant.
+
+REPÈRE AVEC L’ÉCRAN
+- Commencer par le texte de gauche, puis descendre vers T, Y et les effectifs.
+- Aller ensuite au graphique `SpecialDay` à droite pour justifier la restriction.
+- Revenir à « Cible : SpecialDay = 0 • N = 11 079 ».
+- Terminer par les deux barres centrales et leur interprétation descriptive.
+- Ne pas confondre ces taux avec les moyennes potentielles AIPW présentées plus tard.
+
+
+------------------------------------------------------------
+ARRÊT APRÈS LA DIAPOSITIVE 2
+La diapositive 3 sera ajoutée après validation de cette partie.
 ------------------------------------------------------------
