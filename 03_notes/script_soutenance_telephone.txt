@@ -1,0 +1,44 @@
+SOUTENANCE — REPÈRES POUR LE TÉLÉPHONE
+Projet d’inférence causale sur les sessions d’achat en ligne
+Durée totale disponible : 15 minutes
+
+Ce fichier contient uniquement les fils conducteurs à consulter pendant la présentation.
+
+============================================================
+INTRODUCTION — ENVIRON 50 SECONDES À 1 MINUTE
+============================================================
+
+1. Saluer le professeur.
+
+2. Projet final : inférence causale appliquée aux intentions d’achat en ligne.
+
+3. Point de départ : sessions du weekend comparées aux sessions de semaine.
+
+4. Résultat étudié : probabilité que la session se termine par une transaction.
+
+5. Revenue : achat oui/non — pas un montant d’argent.
+
+6. Question causale : effet moyen du weekend sur cette probabilité.
+
+7. Ne pas prédire les achats session par session.
+
+8. Données observationnelles — Weekend non attribué au hasard.
+
+9. Conséquence : différence observée ≠ preuve automatique d’un effet causal.
+
+10. Annonce du parcours :
+    - question et données ;
+    - méthode causale ;
+    - résultats ;
+    - limites.
+
+ÉCRAN
+- Diapositive de titre affichée.
+- S’appuyer sur « inférence causale » et « intentions d’achat en ligne ».
+- Garder les méthodes et les chiffres pour leurs diapositives.
+
+
+------------------------------------------------------------
+ARRÊT POUR VALIDATION DU FORMAT
+La diapositive 1 ne sera ajoutée qu’après validation de cette approche.
+------------------------------------------------------------

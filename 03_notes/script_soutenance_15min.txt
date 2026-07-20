@@ -1,45 +1,59 @@
-SCRIPT DE SOUTENANCE — FORMAT TÉLÉPHONE
+SCRIPT DE SOUTENANCE — VERSION DE PRÉPARATION
 Projet d’inférence causale sur les sessions d’achat en ligne
 Durée totale disponible : 15 minutes
 
-Ce fichier sera complété progressivement après validation de chaque partie.
+Pour chaque partie, ce fichier contiendra :
+1. un texte complet pour comprendre et préparer le discours ;
+2. un fil conducteur en points pour parler plus librement.
 
 ============================================================
-INTRODUCTION — DURÉE VISÉE : ENVIRON 1 MINUTE 20 À 1 MINUTE 35
+INTRODUCTION — DURÉE VISÉE : ENVIRON 50 SECONDES À 1 MINUTE
 ============================================================
 
 VERSION 1 — TEXTE COMPLET POUR PRÉPARER L’INTRODUCTION
 
-Bonjour, je vais vous présenter mon projet final d’inférence causale sur les intentions d’achat en ligne.
+Bonjour, je vais vous présenter mon projet final d’inférence causale appliqué aux intentions d’achat en ligne.
 
-Ce travail étudie l’effet qu’aurait une session de navigation durant le weekend plutôt qu’en semaine sur sa probabilité de se terminer par une transaction. La variable Revenue indique seulement si un achat a eu lieu : elle ne mesure pas une somme d’argent.
+La question principale est de savoir si le fait qu’une session ait lieu durant le weekend plutôt qu’en semaine modifie sa probabilité de se terminer par une transaction. Ici, Revenue indique simplement si un achat a eu lieu ou non : ce n’est pas un montant d’argent.
 
-L’objectif n’est pas de prédire quelles sessions conduiront à un achat. Il est de comparer deux scénarios hypothétiques pour des sessions aussi comparables que possible.
+L’objectif n’est donc pas de prédire les achats session par session, mais d’estimer l’effet moyen du weekend.
 
-La difficulté est que les données sont observationnelles : le weekend n’a pas été attribué aléatoirement. Une différence de taux peut aussi venir du calendrier, du profil, du trafic ou de variables absentes.
+La difficulté centrale est que les données sont observationnelles : le weekend n’a pas été attribué aléatoirement. Une différence observée entre les groupes ne constitue donc pas automatiquement une preuve causale.
 
-J’ai donc défini une population cible, construit un DAG, utilisé FCI comme exploration complémentaire, vérifié la positivité et l’équilibre, puis comparé plusieurs estimateurs, principalement l’AIPW avec cross-fitting. J’ai enfin réalisé des analyses de sensibilité.
-
-Le résultat suggère un faible contraste positif, mais son incertitude et les hypothèses nécessaires empêchent d’en faire une preuve causale. Je distinguerai donc ce qui est observé, ce qui est estimé sous hypothèses et ce qui ne peut pas être garanti.
+Je présenterai d’abord la question et les données, puis la méthode causale, les résultats obtenus et enfin leurs limites.
 
 
-VERSION 2 — POINTS À DIRE DANS L’ORDRE
+VERSION 2 — FIL CONDUCTEUR EN POINTS
+Ces points sont des repères à développer librement, pas des phrases à réciter.
 
-1. Bonjour. Je vais présenter mon projet final d’inférence causale sur les intentions d’achat en ligne.
+1. Saluer le professeur.
 
-2. La question étudiée est l’effet d’une session ayant lieu durant le weekend plutôt qu’en semaine sur sa probabilité de se terminer par une transaction.
+2. Projet final : inférence causale appliquée aux intentions d’achat en ligne.
 
-3. Revenue est un indicateur binaire de transaction. Cette variable ne représente pas un montant d’argent.
+3. Point de départ : sessions du weekend comparées aux sessions de semaine.
 
-4. L’objectif n’est pas de prédire les achats. Il est de comparer deux scénarios hypothétiques pour des sessions aussi comparables que possible.
+4. Résultat étudié : probabilité que la session se termine par une transaction.
 
-5. Les données sont observationnelles. Le weekend n’a pas été attribué aléatoirement.
+5. Revenue : achat oui/non — pas un montant d’argent.
 
-6. La différence observée peut aussi provenir du calendrier, du profil des visiteurs, du trafic ou de variables absentes de la base.
+6. Question causale : effet moyen du weekend sur cette probabilité.
 
-7. L’analyse définit une population cible, construit un DAG, utilise FCI comme exploration, vérifie la positivité et l’équilibre, puis compare plusieurs estimateurs, principalement l’AIPW avec cross-fitting.
+7. Ne pas prédire les achats session par session.
 
-8. Le résultat suggère un faible contraste positif, mais il reste incertain et dépend d’hypothèses causales fortes. La présentation séparera ce qui est observé, ce qui est estimé et ce qui ne peut pas être garanti.
+8. Données observationnelles — Weekend non attribué au hasard.
+
+9. Conséquence : différence observée ≠ preuve automatique d’un effet causal.
+
+10. Annonce du parcours :
+    - question et données ;
+    - méthode causale ;
+    - résultats ;
+    - limites.
+
+REPÈRE AVEC L’ÉCRAN
+- La diapositive de titre reste affichée.
+- S’appuyer sur les mots « inférence causale » et « intentions d’achat en ligne ».
+- Ne pas annoncer les méthodes ou les chiffres : ils seront expliqués sur leurs diapositives.
 
 
 ------------------------------------------------------------
