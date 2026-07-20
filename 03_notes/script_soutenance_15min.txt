@@ -342,6 +342,331 @@ REPÈRE AVEC L’ÉCRAN
 
 
 ------------------------------------------------------------
-ARRÊT APRÈS LA DIAPOSITIVE 5
-Les diapositives 6 à 10 seront ajoutées après retour sur cette première série.
+DIAPOSITIVE 6 — SCORE DE PROPENSION ET RECOUVREMENT
+Durée visée : environ 1 minute à 1 minute 10
+------------------------------------------------------------
+
+VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+
+Après avoir posé l’hypothèse de positivité, il faut vérifier si elle est crédible dans les données. Le score de propension est la probabilité estimée qu’une session ait lieu le weekend compte tenu des covariables Z. Il ne représente surtout pas la probabilité que la session aboutisse à un achat.
+
+L’histogramme superpose les scores des sessions de semaine, en bleu, et de weekend, en orange. Leur large recouvrement signifie que, pour de nombreux profils comparables, nous observons réellement les deux situations. Si les distributions étaient séparées, l’analyse devrait inventer la comparaison par extrapolation et certains poids deviendraient très grands.
+
+À droite, l’étendue estimée va approximativement de 0,05 à 0,92. Seulement neuf observations sont légèrement sous 0,05 et aucune n’est au-dessus de 0,95. Les situations presque certaines d’être en semaine ou presque certaines d’être en weekend sont donc rares dans la population restreinte.
+
+Ce diagnostic soutient la positivité pratique pour les sessions `SpecialDay=0`. Il ne prouve toutefois ni l’échangeabilité ni l’absence de confusion cachée, car il repose uniquement sur les covariables observées et sur un score estimé. Le recouvrement rend la pondération possible; il reste maintenant à vérifier si cette pondération équilibre réellement les groupes.
+
+
+VERSION 2 — FIL CONDUCTEUR EN POINTS
+
+1. Reprendre l’hypothèse précédente : positivité à vérifier dans les données.
+
+2. Score de propension = probabilité estimée qu’une session ait lieu le weekend, compte tenu de Z.
+
+3. Attention : ce n’est pas la probabilité d’achat.
+
+4. Axe horizontal du graphique = probabilité estimée de Weekend.
+
+5. Histogrammes :
+   - bleu = sessions de semaine ;
+   - orange = sessions de weekend.
+
+6. Large zone commune = profils comparables réellement présents dans les deux groupes.
+
+7. Sans recouvrement : extrapolation du modèle et poids potentiellement extrêmes.
+
+8. Encadré gris : scores approximativement de 0,05 à 0,92.
+
+9. Encadré orange :
+   - neuf observations sous 0,05 ;
+   - aucune au-dessus de 0,95.
+
+10. Interprétation : très peu de sessions presque certaines d’appartenir à un seul groupe.
+
+11. Conclusion limitée : positivité pratique crédible dans la population `SpecialDay=0`.
+
+12. Ne pas conclure à l’échangeabilité ou à l’absence de confondeurs cachés.
+
+13. Transition : le recouvrement permet les poids; vérifier maintenant s’ils équilibrent les covariables.
+
+REPÈRE AVEC L’ÉCRAN
+- Commencer par définir le score en utilisant l’axe horizontal.
+- Montrer la superposition bleue et orange au centre du graphique.
+- Passer aux deux encadrés chiffrés à droite.
+- Terminer par la phrase noire : le diagnostic ne renseigne pas sur la confusion cachée.
+
+
+------------------------------------------------------------
+DIAPOSITIVE 7 — ÉQUILIBRE DES COVARIABLES APRÈS IPW
+Durée visée : environ 55 secondes à 1 minute 05
+------------------------------------------------------------
+
+VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+
+Le recouvrement permet de calculer les poids IPW. Leur objectif est de créer une pseudo-population dans laquelle les groupes semaine et weekend se ressemblent davantage sur les covariables observées.
+
+Le graphique utilise la différence moyenne standardisée, ou SMD, pour mesurer le déséquilibre. Une valeur proche de zéro signifie que la modalité est répartie de façon similaire entre les groupes. Les lignes pointillées à moins 0,10 et plus 0,10 représentent le seuil usuel au-delà duquel un déséquilibre devient préoccupant.
+
+Les points rouges décrivent la situation avant pondération. Le SMD absolu maximal atteint alors 0,268, ce qui montre des écarts de composition. Les points verts décrivent la situation après IPW : ils se rapprochent tous de zéro, le maximum tombe à 0,040 et aucune modalité ne dépasse 0,10.
+
+La pondération a donc bien équilibré les covariables incluses dans le modèle. Cette vérification est utile, mais elle ne concerne que ce qui a été mesuré; elle ne crée pas l’équilibre sur les promotions, les prix ou l’intention d’achat absents. Une fois le support et l’équilibre vérifiés, nous pouvons interpréter l’estimation principale et son incertitude.
+
+
+VERSION 2 — FIL CONDUCTEUR EN POINTS
+
+1. Recouvrement suffisant → calcul des poids IPW possible.
+
+2. Objectif de l’IPW : rendre les groupes plus comparables sur les covariables observées.
+
+3. SMD = différence moyenne standardisée entre semaine et weekend.
+
+4. Zéro sur l’axe = équilibre parfait pour la modalité concernée.
+
+5. Lignes pointillées à ±0,10 = seuil usuel de déséquilibre préoccupant.
+
+6. Points rouges = avant pondération.
+
+7. Avant IPW : SMD absolu maximal de 0,268.
+
+8. Points verts = après pondération, tous rapprochés de zéro.
+
+9. Après IPW : SMD absolu maximal de 0,040.
+
+10. Aucune modalité au-dessus de |SMD| = 0,10 après pondération.
+
+11. Conclusion : bon équilibre des covariables incluses dans le modèle.
+
+12. Limite : aucun équilibre garanti pour les variables non observées.
+
+13. Transition : support et équilibre vérifiés → lire l’estimation principale et son incertitude.
+
+REPÈRE AVEC L’ÉCRAN
+- Définir le SMD en montrant l’axe horizontal et le zéro central.
+- Montrer les lignes pointillées à ±0,10.
+- Comparer visuellement les points rouges aux points verts.
+- Lire ensuite l’encadré « 0,268 → 0,040 ».
+- Finir par l’encadré bleu qui limite la conclusion aux covariables observées.
+
+
+------------------------------------------------------------
+DIAPOSITIVE 8 — RÉSULTAT PRINCIPAL AIPW
+Durée visée : environ 1 minute 25 à 1 minute 40
+------------------------------------------------------------
+
+VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+
+Cette diapositive présente le résultat principal. Dans le graphique, chaque point est une estimation centrale et chaque ligne horizontale son intervalle de confiance à 95 %. La ligne verticale en zéro permet de voir si les données restent compatibles avec l’absence d’effet moyen.
+
+La première ligne est la différence brute observée : +2,026 points de pourcentage, avec un intervalle de 0,378 à 3,674. Elle décrit une association, sans ajustement. Les trois estimateurs ajustés donnent ensuite des centres proches : +1,384 point pour la standardisation, +1,444 pour l’IPW et +1,506 pour l’AIPW. Leur accord montre que le centre n’est pas propre à une seule méthode, mais il ne valide pas les hypothèses qu’elles partagent.
+
+L’AIPW est l’analyse principale. Elle estime une hausse moyenne de 1,506 point, avec un intervalle exact de −0,176 à 3,188 points; la diapositive les arrondit à +1,51 et [−0,18; 3,19]. Les moyennes de résultats potentiels estimées sont de 17,67 % sous weekend et de 16,16 % sous semaine.
+
+Ces deux moyennes sont ajustées et estimées. Elles ne doivent pas être confondues avec les taux bruts observés précédemment, 18,06 % et 16,03 %. Comme l’intervalle AIPW contient zéro, l’analyse ne permet pas d’établir un effet moyen différent de zéro. Elle ne prouve pas non plus que l’effet est exactement nul : les données sont compatibles avec une petite baisse comme avec une hausse allant jusqu’à environ 3,19 points, sous les hypothèses de l’analyse.
+
+Le message correct est donc un centre positif et modeste, accompagné d’une incertitude importante. La prochaine étape consiste à modifier plusieurs choix raisonnables pour voir si ce message résiste.
+
+
+VERSION 2 — FIL CONDUCTEUR EN POINTS
+
+1. Graphique principal :
+   - point = estimation centrale ;
+   - ligne horizontale = intervalle de confiance à 95 % ;
+   - ligne verticale à zéro = absence d’effet moyen.
+
+2. Première ligne — différence brute observée : +2,026 points.
+
+3. IC brut : [0,378; 3,674] — association descriptive, sans ajustement.
+
+4. Trois centres ajustés proches :
+   - standardisation : +1,384 ;
+   - IPW : +1,444 ;
+   - AIPW : +1,506 point.
+
+5. Accord utile entre méthodes, mais pas validation automatique de leurs hypothèses communes.
+
+6. Encadré orange — résultat principal AIPW : +1,506 point.
+
+7. IC exact à 95 % : [−0,176; 3,188].
+
+8. Valeurs arrondies visibles : +1,51 et [−0,18; 3,19].
+
+9. Encadré gris — moyennes potentielles estimées :
+   - weekend : 17,67 % ;
+   - semaine : 16,16 %.
+
+10. Ne pas les confondre avec les taux bruts observés : 18,06 % et 16,03 %.
+
+11. Différence entre moyennes potentielles = estimation AIPW de 1,506 point.
+
+12. L’IC AIPW traverse zéro.
+
+13. Conclusion permise : impossible d’établir un effet moyen différent de zéro.
+
+14. Conclusion interdite : « le weekend n’a aucun effet ».
+
+15. Valeurs compatibles : petite baisse jusqu’à hausse d’environ 3,19 points, sous hypothèses.
+
+16. Message central : signal positif modeste, mais incertitude importante.
+
+17. Transition : tester maintenant la dépendance du résultat aux choix raisonnables d’analyse.
+
+REPÈRE AVEC L’ÉCRAN
+- Commencer par la ligne verticale zéro, puis expliquer les points et intervalles.
+- Lire le graphique du haut vers le bas : brute, standardisation, IPW, AIPW.
+- Passer à l’encadré orange pour annoncer le résultat principal exact puis arrondi.
+- Descendre vers les deux moyennes potentielles dans l’encadré gris.
+- Revenir au fait que l’intervalle principal traverse zéro.
+
+
+------------------------------------------------------------
+DIAPOSITIVE 9 — ROBUSTESSE, E-VALUE ET LIMITES
+Durée visée : environ 1 minute 35 à 1 minute 50
+------------------------------------------------------------
+
+VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+
+Comme l’estimation dépend de choix de population, de variables et de modèles, cette diapositive compare six analyses de sensibilité. Dans le graphique, chaque point orange est une estimation AIPW et chaque barre représente son intervalle; la ligne verticale correspond à zéro.
+
+Tous les centres restent positifs, entre environ +1,20 et +2,23 points. La ligne principale donne +1,506 point. L’analyse sans `TrafficType` monte à +2,233 points avec un intervalle de 0,535 à 3,931. La population complète, l’exclusion des doublons et la restriction au support commun donnent des centres proches de +1,20 à +1,56 point. Enfin, les forêts aléatoires pour les modèles de nuisance donnent +1,74 point, avec un intervalle de 0,12 à 3,35.
+
+La direction des centres est donc assez stable, mais leur amplitude et surtout la conclusion statistique varient : la plupart des intervalles contiennent zéro, tandis que ceux sans `TrafficType` et avec forêt aléatoire l’excluent. Il serait incorrect de choisir après coup uniquement le scénario dont l’intervalle est positif; l’analyse principale doit rester la référence.
+
+L’E-value du point vaut 1,412. Intuitivement, une variable non mesurée associée à la fois au weekend et à l’achat par des rapports de risque d’environ 1,41 pourrait suffire à expliquer le centre estimé, au-delà des covariables ajustées. L’E-value de la borne est 1,00 puisque l’intervalle principal atteint déjà le nul. La résistance à la confusion cachée est donc limitée.
+
+Les limites fondamentales restent celles de l’encadré orange : Weekend n’est pas assigné, les promotions, prix et intentions sont absents, le statut causal de `TrafficType` est ambigu, et le site ainsi que plusieurs catégories sont anonymes. Les sensibilités rendent ces fragilités visibles; elles ne les suppriment pas. Elles conduisent donc à une conclusion prudente : un signal cohérent, mais insuffisant pour une affirmation causale ferme.
+
+
+VERSION 2 — FIL CONDUCTEUR EN POINTS
+
+1. But de la diapositive : modifier plusieurs choix raisonnables et observer ce qui change.
+
+2. Graphique :
+   - point orange = estimation AIPW ;
+   - barre = intervalle ;
+   - ligne verticale = zéro.
+
+3. Six scénarios de sensibilité, sans en choisir un après coup comme « meilleur ».
+
+4. Tous les centres restent positifs : environ +1,20 à +2,23 points.
+
+5. Analyse principale : +1,506 [−0,176; 3,188].
+
+6. Sans `TrafficType` : +2,233 [0,535; 3,931].
+
+7. Population complète, sans doublons et support commun : centres proches de +1,20 à +1,56.
+
+8. Forêt aléatoire pour les nuisances : +1,74 [0,12; 3,35].
+
+9. Ce qui paraît stable : direction positive des estimations centrales.
+
+10. Ce qui varie : amplitude et inclusion ou non de zéro dans les intervalles.
+
+11. Ne pas sélectionner uniquement les deux scénarios dont l’IC est positif.
+
+12. L’analyse principale reste la référence annoncée à l’avance.
+
+13. E-value du point : 1,412.
+
+14. Intuition : une confusion non mesurée de force modérée pourrait expliquer le centre estimé.
+
+15. E-value de la borne : 1,00, car l’IC principal contient déjà zéro.
+
+16. Encadré orange — limites :
+    - Weekend non assigné ;
+    - promotions, prix et intention absents ;
+    - statut de `TrafficType` ambigu ;
+    - site et catégories anonymes.
+
+17. Les sensibilités montrent les fragilités; elles ne les corrigent pas.
+
+18. Conclusion : signal cohérent, mais affirmation causale ferme non justifiée.
+
+19. Transition : répondre finalement à la question de départ avec une conclusion proportionnée.
+
+REPÈRE AVEC L’ÉCRAN
+- Commencer par le graphique et la ligne principale en haut.
+- Descendre rapidement sur les cinq variantes, sans lire chaque intervalle en entier.
+- Passer à l’encadré bleu « Ce qui varie » pour résumer les amplitudes et l’E-value.
+- Terminer par l’encadré orange « Ce qui limite ».
+- Utiliser le titre pour résumer : l’amplitude varie, la prudence reste la même.
+
+
+------------------------------------------------------------
+DIAPOSITIVE 10 — CONCLUSION ET REPRODUCTIBILITÉ
+Durée visée : environ 1 minute 20 à 1 minute 35
+------------------------------------------------------------
+
+VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+
+Pour répondre à la question de départ, dans les sessions existantes hors proximité d’un jour commercial spécial, les données suggèrent un faible contraste positif du weekend, mais elles n’établissent pas un effet causal moyen différent de zéro.
+
+L’estimation AIPW principale est de +1,506 point de probabilité de transaction, avec un intervalle à 95 % de −0,176 à 3,188 points. Le recouvrement des scores, l’équilibre après pondération et l’accord des estimateurs ajustés renforcent la cohérence de l’analyse sur les variables mesurées. Ils ne compensent toutefois pas les promotions, les prix, l’intention d’achat ou d’autres confondeurs absents des données observationnelles.
+
+Le travail est reproductible : le CSV UCI et son empreinte SHA-256 ont été vérifiés, la graine utilisée est `20260715`, le cross-fitting comporte cinq plis, et les figures, tableaux et dépendances sont documentés.
+
+La portée pratique reste étroite. Cette étude concerne la probabilité de conversion de sessions existantes dans la population `SpecialDay=0`; elle ne mesure ni le nombre de visites générées, ni le montant des ventes, ni la rentabilité d’une campagne. Elle ne suffit donc pas, à elle seule, pour recommander de déplacer une stratégie commerciale vers le weekend.
+
+La conclusion finale est un signal causal possible et quantitativement faible, qui devrait être confirmé par une expérience randomisée ou par des données temporelles plus riches incluant notamment les prix, les promotions et un suivi fiable des utilisateurs. Je vous remercie pour votre attention.
+
+
+VERSION 2 — FIL CONDUCTEUR EN POINTS
+
+1. Revenir explicitement à la question de départ.
+
+2. Population concernée : sessions existantes avec `SpecialDay=0`.
+
+3. Conclusion générale : faible contraste positif suggéré.
+
+4. Ne pas dire : effet causal différent de zéro établi.
+
+5. Chiffre principal exact : AIPW = +1,506 point.
+
+6. IC exact à 95 % : [−0,176; 3,188] — zéro inclus.
+
+7. Ce qui renforce l’analyse sur les variables mesurées :
+   - bon recouvrement ;
+   - équilibre après IPW ;
+   - centres ajustés proches ;
+   - analyses de sensibilité explicites.
+
+8. Ce que cela ne corrige pas : promotions, prix, intention d’achat et autres confondeurs absents.
+
+9. Partie « Reproductibilité » :
+   - CSV UCI et SHA-256 vérifiés ;
+   - graine `20260715` ;
+   - cross-fitting à cinq plis ;
+   - figures, tableaux et dépendances documentés.
+
+10. Portée limitée : conversion des sessions existantes hors jours spéciaux.
+
+11. Ne mesure pas le nombre de visites, le montant des ventes ou la rentabilité d’une campagne.
+
+12. Donc : aucune recommandation de déplacer une campagne sur cette étude seule.
+
+13. Suite idéale : expérience randomisée ou données temporelles plus riches.
+
+14. Dernière idée : signal causal possible, quantitativement faible, à confirmer.
+
+15. Remercier le professeur.
+
+REPÈRE AVEC L’ÉCRAN
+- Commencer par lire avec ses propres mots la grande conclusion du haut.
+- Passer au bloc orange « Interprétation » et donner le chiffre principal.
+- Aller au bloc vert « Reproductibilité » pour montrer la traçabilité du travail.
+- Utiliser le bandeau gris pour rappeler que les diagnostics ne remplacent pas les variables absentes.
+- Terminer sur la portée pratique et la nécessité d’une confirmation future.
+
+
+============================================================
+REPÈRES TEMPORELS POUR L’ENSEMBLE DE LA PRÉSENTATION
+============================================================
+
+- Fin de l’introduction : environ 0 min 55.
+- Fin de la diapositive 2 : environ 2 min 25.
+- Fin de la diapositive 5 : environ 7 min 20.
+- Fin de la diapositive 7 : environ 9 min 25.
+- Fin de la diapositive 8 : environ 11 minutes.
+- Fin de la diapositive 9 : environ 12 min 45.
+- Fin de la conclusion : environ 14 min 15 à 14 min 30.
+- Les respirations, changements de diapositive et petites reformulations doivent conduire près de 15 minutes sans dépasser.
 ------------------------------------------------------------
