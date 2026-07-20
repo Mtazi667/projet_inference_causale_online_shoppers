@@ -1,0 +1,48 @@
+SCRIPT DE SOUTENANCE — FORMAT TÉLÉPHONE
+Projet d’inférence causale sur les sessions d’achat en ligne
+Durée totale disponible : 15 minutes
+
+Ce fichier sera complété progressivement après validation de chaque partie.
+
+============================================================
+INTRODUCTION — DURÉE VISÉE : ENVIRON 1 MINUTE 20 À 1 MINUTE 35
+============================================================
+
+VERSION 1 — TEXTE COMPLET POUR PRÉPARER L’INTRODUCTION
+
+Bonjour, je vais vous présenter mon projet final d’inférence causale sur les intentions d’achat en ligne.
+
+Ce travail étudie l’effet qu’aurait une session de navigation durant le weekend plutôt qu’en semaine sur sa probabilité de se terminer par une transaction. La variable Revenue indique seulement si un achat a eu lieu : elle ne mesure pas une somme d’argent.
+
+L’objectif n’est pas de prédire quelles sessions conduiront à un achat. Il est de comparer deux scénarios hypothétiques pour des sessions aussi comparables que possible.
+
+La difficulté est que les données sont observationnelles : le weekend n’a pas été attribué aléatoirement. Une différence de taux peut aussi venir du calendrier, du profil, du trafic ou de variables absentes.
+
+J’ai donc défini une population cible, construit un DAG, utilisé FCI comme exploration complémentaire, vérifié la positivité et l’équilibre, puis comparé plusieurs estimateurs, principalement l’AIPW avec cross-fitting. J’ai enfin réalisé des analyses de sensibilité.
+
+Le résultat suggère un faible contraste positif, mais son incertitude et les hypothèses nécessaires empêchent d’en faire une preuve causale. Je distinguerai donc ce qui est observé, ce qui est estimé sous hypothèses et ce qui ne peut pas être garanti.
+
+
+VERSION 2 — POINTS À DIRE DANS L’ORDRE
+
+1. Bonjour. Je vais présenter mon projet final d’inférence causale sur les intentions d’achat en ligne.
+
+2. La question étudiée est l’effet d’une session ayant lieu durant le weekend plutôt qu’en semaine sur sa probabilité de se terminer par une transaction.
+
+3. Revenue est un indicateur binaire de transaction. Cette variable ne représente pas un montant d’argent.
+
+4. L’objectif n’est pas de prédire les achats. Il est de comparer deux scénarios hypothétiques pour des sessions aussi comparables que possible.
+
+5. Les données sont observationnelles. Le weekend n’a pas été attribué aléatoirement.
+
+6. La différence observée peut aussi provenir du calendrier, du profil des visiteurs, du trafic ou de variables absentes de la base.
+
+7. L’analyse définit une population cible, construit un DAG, utilise FCI comme exploration, vérifie la positivité et l’équilibre, puis compare plusieurs estimateurs, principalement l’AIPW avec cross-fitting.
+
+8. Le résultat suggère un faible contraste positif, mais il reste incertain et dépend d’hypothèses causales fortes. La présentation séparera ce qui est observé, ce qui est estimé et ce qui ne peut pas être garanti.
+
+
+------------------------------------------------------------
+ARRÊT POUR VALIDATION DU FORMAT
+La diapositive 1 ne sera ajoutée qu’après validation de cette approche.
+------------------------------------------------------------
