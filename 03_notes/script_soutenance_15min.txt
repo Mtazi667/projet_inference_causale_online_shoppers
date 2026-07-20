@@ -6,6 +6,9 @@ Pour chaque partie, ce fichier contiendra :
 1. un texte complet pour comprendre et préparer le discours ;
 2. un fil conducteur en points pour parler plus librement.
 
+Les durées indiquées correspondent au fil conducteur prononcé à l’oral.
+Le texte complet est volontairement plus développé et ne doit pas être lu intégralement pendant la présentation.
+
 ============================================================
 INTRODUCTION — DURÉE VISÉE : ENVIRON 50 SECONDES À 1 MINUTE
 ============================================================
@@ -131,6 +134,214 @@ REPÈRE AVEC L’ÉCRAN
 
 
 ------------------------------------------------------------
-ARRÊT APRÈS LA DIAPOSITIVE 2
-La diapositive 3 sera ajoutée après validation de cette partie.
+DIAPOSITIVE 3 — DAG ET CHOIX DES VARIABLES D’AJUSTEMENT
+Durée visée : environ 1 minute 30 à 1 minute 45
+------------------------------------------------------------
+
+VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+
+Après avoir défini la population cible, il faut décider quelles variables ajuster. Le DAG est une carte de mes hypothèses causales et de l’ordre temporel des variables. Ce n’est pas un graphique de corrélations et ses flèches ne sont pas des effets estimés par les données.
+
+Au centre, le nœud orange représente `Weekend`, l’exposition, et le nœud rouge représente `Revenue`, le résultat. Les nœuds verts à gauche regroupent les informations supposées antérieures à la session : le calendrier correspond principalement au mois; le profil comprend le type de visiteur, la région, le système d’exploitation et le navigateur; le canal correspond à `TrafficType`.
+
+Ces caractéristiques peuvent influencer à la fois le fait d’observer une session le weekend et sa probabilité de transaction. Elles peuvent donc créer des chemins de confusion, appelés chemins de porte arrière. L’analyse les ajuste pour essayer de bloquer ces chemins.
+
+À l’inverse, les variables de navigation et `PageValues`, en gris à droite, sont exclues parce qu’elles sont mesurées pendant ou après la session. Ajuster un médiateur pourrait supprimer une partie de l’effet recherché; ajuster un collider pourrait créer une association artificielle; `PageValues` présente aussi un risque de fuite d’information liée au résultat.
+
+Les nœuds gris du haut rappellent enfin les promotions, les prix et l’intention d’achat, qui ne sont pas observés. Ils représentent une limite importante, car aucune méthode ne peut directement ajuster une variable absente du fichier.
+
+Le statut temporel de `TrafficType` reste ambigu. L’analyse principale l’utilise comme variable pré-exposition, puis une analyse de sensibilité vérifie ce qui change lorsqu’on la retire. Ce DAG reste donc un modèle raisonné, pas une vérité démontrée; FCI apporte ensuite un regard exploratoire fondé sur les données.
+
+
+VERSION 2 — FIL CONDUCTEUR EN POINTS
+
+1. Transition depuis la cible : décider maintenant quelles variables ajuster.
+
+2. DAG = carte des hypothèses causales et de l’ordre temporel.
+
+3. Ne pas le présenter comme une preuve issue des données ni comme un simple graphique de corrélations.
+
+4. Commencer au centre :
+   - orange = `Weekend`, exposition ;
+   - rouge = `Revenue`, résultat.
+
+5. Passer aux nœuds verts à gauche : caractéristiques supposées antérieures à l’exposition.
+
+6. Calendrier → principalement `Month`.
+
+7. Profil visiteur → `VisitorType`, `Region`, `OperatingSystems`, `Browser`.
+
+8. Canal trafic → `TrafficType`.
+
+9. Intuition de la porte arrière : ces variables peuvent influencer à la fois Weekend et Revenue.
+
+10. Décision affichée en bas : ajuster calendrier, profil et trafic pour bloquer ces chemins de confusion.
+
+11. Nœuds gris à droite : navigation et `PageValues`, mesurées pendant ou après la session.
+
+12. Pourquoi les exclure :
+    - médiateur → risque de bloquer une partie de l’effet total ;
+    - collider → risque de créer un biais ;
+    - `PageValues` → possible fuite d’information liée au résultat.
+
+13. Nœuds gris du haut : promotions, prix et intention d’achat non observés.
+
+14. Limite : aucune méthode ne peut ajuster directement ce qui manque dans le fichier.
+
+15. Point ambigu : ordre temporel de `TrafficType` pas totalement certain.
+
+16. Choix du projet : inclus dans l’analyse principale, puis retiré dans une sensibilité.
+
+17. Transition : DAG raisonné, donc ajout d’un second regard exploratoire avec FCI.
+
+REPÈRE AVEC L’ÉCRAN
+- Partir de `Weekend` en orange et de `Revenue` en rouge.
+- Aller vers les trois nœuds verts, puis lire « Ajuster » dans le bandeau inférieur.
+- Passer aux nœuds gris de droite, puis lire « Exclure ».
+- Terminer par les deux nœuds gris du haut et la colonne « Non observé ».
+- Ne pas essayer de suivre chaque flèche une par une : expliquer les familles de variables.
+
+
+------------------------------------------------------------
+DIAPOSITIVE 4 — FCI ET PAG EXPLORATOIRE
+Durée visée : environ 1 minute 20 à 1 minute 35
+------------------------------------------------------------
+
+VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+
+Le DAG précédent partait de connaissances et d’hypothèses formulées avant l’analyse. FCI, pour Fast Causal Inference, prend le problème dans l’autre sens : il examine les indépendances conditionnelles observées et cherche quelles relations restent compatibles avec les données, tout en autorisant l’existence de causes cachées.
+
+Ici, l’analyse exploratoire regroupe six grandes variables dans les 12 330 sessions complètes. Elle utilise un test G² d’indépendance conditionnelle, un seuil principal de 1 % et des contraintes temporelles. FCI produit un PAG, c’est-à-dire une carte où certaines orientations restent volontairement partielles parce que les données ne permettent pas toujours de choisir un sens causal unique. La légende du bas distingue ainsi les directions imposées, partielles ou indéterminées.
+
+Le message principal du graphe est dans le titre : FCI ne conserve pas d’arête directe entre `Weekend` et `Revenue`, et cette absence persiste aux trois seuils testés.
+
+Il faut cependant lire ce résultat avec prudence. L’absence d’arête directe ne prouve pas que l’effet total est nul : un chemin indirect peut exister. Le résultat dépend aussi du regroupement et de la discrétisation des variables, de la puissance des tests, des contraintes imposées et des hypothèses de FCI. De plus, le PAG utilise la base complète, tandis que l’analyse principale cible `SpecialDay=0`.
+
+FCI constitue donc une exploration complémentaire, pas un arbitre capable de réfuter ou de confirmer l’AIPW. Le DAG raisonné reste la base de l’identification. La prochaine diapositive formalise alors le contraste, ses hypothèses et les méthodes utilisées pour l’estimer.
+
+
+VERSION 2 — FIL CONDUCTEUR EN POINTS
+
+1. Lien avec la diapositive précédente : DAG construit à partir du raisonnement de domaine.
+
+2. FCI = Fast Causal Inference.
+
+3. Intuition : partir des indépendances observées pour explorer les relations encore compatibles avec les données.
+
+4. Particularité : FCI autorise l’existence de causes cachées ou variables latentes.
+
+5. Encadré bleu à droite — configuration :
+   - six variables regroupées ;
+   - 12 330 sessions complètes ;
+   - test G² d’indépendance conditionnelle ;
+   - seuil principal de 1 % ;
+   - contraintes temporelles.
+
+6. Résultat = PAG, une carte de relations parfois seulement partiellement orientées.
+
+7. Légende du bas : directions imposées, partielles ou indéterminées.
+
+8. Ne pas expliquer chaque arête; se concentrer sur `Weekend` orange et `Revenue` rouge.
+
+9. Observation principale : aucune arête directe entre Weekend et Revenue.
+
+10. Robustesse interne : même absence aux trois seuils testés.
+
+11. Attention : absence d’arête directe ≠ effet total nul.
+
+12. Un effet pourrait passer par un chemin indirect.
+
+13. Autres limites : regroupement, discrétisation, puissance des tests, contraintes et hypothèses de FCI.
+
+14. Population différente : PAG sur les 12 330 sessions; AIPW principale dans `SpecialDay=0`.
+
+15. Conclusion : FCI complète le DAG, mais ne le remplace pas et ne réfute pas l’AIPW.
+
+16. Transition : revenir au DAG pour définir formellement l’effet et les méthodes d’estimation.
+
+REPÈRE AVEC L’ÉCRAN
+- Commencer par l’encadré « Analyse exploratoire » à droite.
+- Montrer ensuite le PAG et identifier seulement Weekend et Revenue.
+- Faire constater visuellement l’absence de ligne directe entre eux.
+- Utiliser l’encadré orange « Lecture prudente » pour donner immédiatement la limite.
+- Finir par la transition vers le cadre Pearl/Rubin.
+
+
+------------------------------------------------------------
+DIAPOSITIVE 5 — CADRE PEARL/RUBIN ET ESTIMATION
+Durée visée : environ 1 minute 50 à 2 minutes 05
+------------------------------------------------------------
+
+VERSION 1 — TEXTE COMPLET POUR PRÉPARER LA DIAPOSITIVE
+
+Cette diapositive relie deux cadres complémentaires. Le cadre de Pearl, avec le DAG et la porte arrière, indique quelles variables ajuster. Le cadre de Rubin, avec les résultats potentiels, définit précisément l’effet que nous voulons connaître.
+
+Dans le bloc bleu, la formule représente l’estimand. `Y(1)` est le résultat potentiel d’une session sous weekend et `Y(0)` son résultat potentiel sous semaine. Leur différence est moyennée parmi les sessions où `SpecialDay=0`. Autrement dit, nous cherchons l’effet moyen du weekend sur la probabilité de transaction dans cette population cible. L’ensemble Z contient les six covariables d’ajustement retenues par le DAG.
+
+Le bloc gris rappelle les quatre hypothèses nécessaires. La consistance relie le résultat observé au scénario réellement reçu et suppose que l’intervention « weekend » est suffisamment bien définie. L’échangeabilité conditionnelle suppose qu’après ajustement sur Z, aucun confondeur important ne reste non mesuré. La positivité exige que chaque profil analysé puisse être observé dans les deux groupes. Enfin, l’absence d’interférence suppose que le jour d’une session ne modifie pas le résultat d’une autre.
+
+La partie inférieure montre quatre regards sur le même contraste. La différence brute ne fait aucun ajustement. La standardisation modélise le résultat. L’IPW de Hájek modélise l’exposition avec le score de propension et normalise les poids. L’AIPW combine les modèles du résultat et de l’exposition, puis utilise un cross-fitting en cinq plis pour limiter le surajustement. C’est l’estimateur principal.
+
+L’AIPW possède une double robustesse vis-à-vis de ces deux modèles statistiques, mais elle ne protège ni contre un confondeur absent ni contre une mauvaise question causale. C’est pourquoi la phrase rouge insiste sur les hypothèses non testables, surtout l’échangeabilité. Avant d’interpréter l’estimation, la diapositive suivante vérifie concrètement le recouvrement et donc la positivité pratique.
+
+
+VERSION 2 — FIL CONDUCTEUR EN POINTS
+
+1. Deux cadres complémentaires :
+   - Pearl → DAG, porte arrière, choix des variables ;
+   - Rubin → résultats potentiels, définition du contraste.
+
+2. Bloc bleu à gauche : formule de l’estimand, c’est-à-dire la quantité que l’on cherche.
+
+3. `Y(1)` = résultat potentiel si la session a lieu le weekend.
+
+4. `Y(0)` = résultat potentiel si elle a lieu en semaine.
+
+5. `Y(1) − Y(0)` = différence conceptuelle pour une même session.
+
+6. Espérance E = moyenne de ces différences.
+
+7. Condition `SpecialDay=0` = population cible de 11 079 sessions.
+
+8. Traduction simple : effet moyen du weekend sur la probabilité de transaction dans cette cible.
+
+9. Ensemble Z affiché : `Month`, `VisitorType`, `Region`, `OperatingSystems`, `Browser`, `TrafficType`.
+
+10. Bloc gris — consistance : résultat observé cohérent avec le scénario réellement reçu; Weekend suffisamment bien défini.
+
+11. Échangeabilité conditionnelle : après Z, aucun confondeur important non mesuré.
+
+12. Insister : hypothèse la plus forte et non directement testable.
+
+13. Positivité : pour chaque profil, possibilité d’observer semaine et weekend.
+
+14. Absence d’interférence : une session ne modifie pas le résultat d’une autre.
+
+15. Ligne du bas — quatre regards sur le même contraste :
+    - brute → aucune correction ;
+    - standardisation → modèle du résultat ;
+    - IPW de Hájek → modèle de l’exposition et poids normalisés ;
+    - AIPW → combinaison des deux modèles.
+
+16. AIPW principale : deux modèles + cross-fitting en cinq plis pour limiter le surajustement.
+
+17. Double robustesse : protection contre la mauvaise spécification d’un des deux modèles de nuisance, sous les autres hypothèses.
+
+18. Limite obligatoire : aucune protection contre un confondeur non mesuré ou un DAG erroné.
+
+19. Relier à la phrase rouge : interprétation causale dépendante d’hypothèses non testables.
+
+20. Transition : vérifier maintenant que des profils comparables existent dans les deux groupes → scores de propension.
+
+REPÈRE AVEC L’ÉCRAN
+- Commencer par le bloc bleu : formule, traduction, puis ensemble Z.
+- Passer au bloc gris et expliquer les quatre hypothèses dans l’ordre affiché.
+- Descendre sur la ligne des quatre méthodes, de gauche à droite.
+- S’arrêter un peu plus sur l’AIPW orange, puisque c’est la méthode principale.
+- Terminer en montrant la phrase rouge, puis annoncer le contrôle du recouvrement.
+
+
+------------------------------------------------------------
+ARRÊT APRÈS LA DIAPOSITIVE 5
+Les diapositives 6 à 10 seront ajoutées après retour sur cette première série.
 ------------------------------------------------------------

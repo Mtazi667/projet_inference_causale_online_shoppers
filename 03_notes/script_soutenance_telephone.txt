@@ -96,6 +96,167 @@ REPÈRE AVEC L’ÉCRAN
 
 
 ------------------------------------------------------------
-ARRÊT APRÈS LA DIAPOSITIVE 2
-La diapositive 3 sera ajoutée après validation de cette partie.
+DIAPOSITIVE 3 — DAG ET CHOIX DES VARIABLES D’AJUSTEMENT
+Durée visée : environ 1 minute 30 à 1 minute 45
+------------------------------------------------------------
+
+1. Transition depuis la cible : décider maintenant quelles variables ajuster.
+
+2. DAG = carte des hypothèses causales et de l’ordre temporel.
+
+3. Ne pas le présenter comme une preuve issue des données ni comme un simple graphique de corrélations.
+
+4. Commencer au centre :
+   - orange = `Weekend`, exposition ;
+   - rouge = `Revenue`, résultat.
+
+5. Passer aux nœuds verts à gauche : caractéristiques supposées antérieures à l’exposition.
+
+6. Calendrier → principalement `Month`.
+
+7. Profil visiteur → `VisitorType`, `Region`, `OperatingSystems`, `Browser`.
+
+8. Canal trafic → `TrafficType`.
+
+9. Intuition de la porte arrière : ces variables peuvent influencer à la fois Weekend et Revenue.
+
+10. Décision affichée en bas : ajuster calendrier, profil et trafic pour bloquer ces chemins de confusion.
+
+11. Nœuds gris à droite : navigation et `PageValues`, mesurées pendant ou après la session.
+
+12. Pourquoi les exclure :
+    - médiateur → risque de bloquer une partie de l’effet total ;
+    - collider → risque de créer un biais ;
+    - `PageValues` → possible fuite d’information liée au résultat.
+
+13. Nœuds gris du haut : promotions, prix et intention d’achat non observés.
+
+14. Limite : aucune méthode ne peut ajuster directement ce qui manque dans le fichier.
+
+15. Point ambigu : ordre temporel de `TrafficType` pas totalement certain.
+
+16. Choix du projet : inclus dans l’analyse principale, puis retiré dans une sensibilité.
+
+17. Transition : DAG raisonné, donc ajout d’un second regard exploratoire avec FCI.
+
+REPÈRE AVEC L’ÉCRAN
+- Partir de `Weekend` en orange et de `Revenue` en rouge.
+- Aller vers les trois nœuds verts, puis lire « Ajuster » dans le bandeau inférieur.
+- Passer aux nœuds gris de droite, puis lire « Exclure ».
+- Terminer par les deux nœuds gris du haut et la colonne « Non observé ».
+- Ne pas essayer de suivre chaque flèche une par une : expliquer les familles de variables.
+
+
+------------------------------------------------------------
+DIAPOSITIVE 4 — FCI ET PAG EXPLORATOIRE
+Durée visée : environ 1 minute 20 à 1 minute 35
+------------------------------------------------------------
+
+1. Lien avec la diapositive précédente : DAG construit à partir du raisonnement de domaine.
+
+2. FCI = Fast Causal Inference.
+
+3. Intuition : partir des indépendances observées pour explorer les relations encore compatibles avec les données.
+
+4. Particularité : FCI autorise l’existence de causes cachées ou variables latentes.
+
+5. Encadré bleu à droite — configuration :
+   - six variables regroupées ;
+   - 12 330 sessions complètes ;
+   - test G² d’indépendance conditionnelle ;
+   - seuil principal de 1 % ;
+   - contraintes temporelles.
+
+6. Résultat = PAG, une carte de relations parfois seulement partiellement orientées.
+
+7. Légende du bas : directions imposées, partielles ou indéterminées.
+
+8. Ne pas expliquer chaque arête; se concentrer sur `Weekend` orange et `Revenue` rouge.
+
+9. Observation principale : aucune arête directe entre Weekend et Revenue.
+
+10. Robustesse interne : même absence aux trois seuils testés.
+
+11. Attention : absence d’arête directe ≠ effet total nul.
+
+12. Un effet pourrait passer par un chemin indirect.
+
+13. Autres limites : regroupement, discrétisation, puissance des tests, contraintes et hypothèses de FCI.
+
+14. Population différente : PAG sur les 12 330 sessions; AIPW principale dans `SpecialDay=0`.
+
+15. Conclusion : FCI complète le DAG, mais ne le remplace pas et ne réfute pas l’AIPW.
+
+16. Transition : revenir au DAG pour définir formellement l’effet et les méthodes d’estimation.
+
+REPÈRE AVEC L’ÉCRAN
+- Commencer par l’encadré « Analyse exploratoire » à droite.
+- Montrer ensuite le PAG et identifier seulement Weekend et Revenue.
+- Faire constater visuellement l’absence de ligne directe entre eux.
+- Utiliser l’encadré orange « Lecture prudente » pour donner immédiatement la limite.
+- Finir par la transition vers le cadre Pearl/Rubin.
+
+
+------------------------------------------------------------
+DIAPOSITIVE 5 — CADRE PEARL/RUBIN ET ESTIMATION
+Durée visée : environ 1 minute 50 à 2 minutes 05
+------------------------------------------------------------
+
+1. Deux cadres complémentaires :
+   - Pearl → DAG, porte arrière, choix des variables ;
+   - Rubin → résultats potentiels, définition du contraste.
+
+2. Bloc bleu à gauche : formule de l’estimand, c’est-à-dire la quantité que l’on cherche.
+
+3. `Y(1)` = résultat potentiel si la session a lieu le weekend.
+
+4. `Y(0)` = résultat potentiel si elle a lieu en semaine.
+
+5. `Y(1) − Y(0)` = différence conceptuelle pour une même session.
+
+6. Espérance E = moyenne de ces différences.
+
+7. Condition `SpecialDay=0` = population cible de 11 079 sessions.
+
+8. Traduction simple : effet moyen du weekend sur la probabilité de transaction dans cette cible.
+
+9. Ensemble Z affiché : `Month`, `VisitorType`, `Region`, `OperatingSystems`, `Browser`, `TrafficType`.
+
+10. Bloc gris — consistance : résultat observé cohérent avec le scénario réellement reçu; Weekend suffisamment bien défini.
+
+11. Échangeabilité conditionnelle : après Z, aucun confondeur important non mesuré.
+
+12. Insister : hypothèse la plus forte et non directement testable.
+
+13. Positivité : pour chaque profil, possibilité d’observer semaine et weekend.
+
+14. Absence d’interférence : une session ne modifie pas le résultat d’une autre.
+
+15. Ligne du bas — quatre regards sur le même contraste :
+    - brute → aucune correction ;
+    - standardisation → modèle du résultat ;
+    - IPW de Hájek → modèle de l’exposition et poids normalisés ;
+    - AIPW → combinaison des deux modèles.
+
+16. AIPW principale : deux modèles + cross-fitting en cinq plis pour limiter le surajustement.
+
+17. Double robustesse : protection contre la mauvaise spécification d’un des deux modèles de nuisance, sous les autres hypothèses.
+
+18. Limite obligatoire : aucune protection contre un confondeur non mesuré ou un DAG erroné.
+
+19. Relier à la phrase rouge : interprétation causale dépendante d’hypothèses non testables.
+
+20. Transition : vérifier maintenant que des profils comparables existent dans les deux groupes → scores de propension.
+
+REPÈRE AVEC L’ÉCRAN
+- Commencer par le bloc bleu : formule, traduction, puis ensemble Z.
+- Passer au bloc gris et expliquer les quatre hypothèses dans l’ordre affiché.
+- Descendre sur la ligne des quatre méthodes, de gauche à droite.
+- S’arrêter un peu plus sur l’AIPW orange, puisque c’est la méthode principale.
+- Terminer en montrant la phrase rouge, puis annoncer le contrôle du recouvrement.
+
+
+------------------------------------------------------------
+ARRÊT APRÈS LA DIAPOSITIVE 5
+Les diapositives 6 à 10 seront ajoutées après retour sur cette première série.
 ------------------------------------------------------------
